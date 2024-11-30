@@ -6,16 +6,15 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:25:52 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/23 09:25:35 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/25 22:02:46 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_test.h"
 #include "String/ft_string.h"
-	// 파이프로 스플릿 하는데 쿼트는 스킵 하면서 나누기
-	// 파이프로 스플릿 후 파싱
+#include "Tokenizer/tokenizer.h"
+
 static char *other_word(int *i, char *line, char *ptr);
-	// pipex_bonus + 리다이렉션
 
 char	*ft_redirection_check(char *line, int *i)
 {
@@ -47,6 +46,8 @@ char	*ft_redirection_check(char *line, int *i)
 char	*ft_single_qoute_check(char *line, int *i)
 {
 	(*i)++;
+	if (line[*i] == '\0')
+		return (NULL);
 	int		first_num;
 	char	*ptr;
 
@@ -57,17 +58,18 @@ char	*ft_single_qoute_check(char *line, int *i)
 		if (line[*i] == '\'')
 		{
 			ptr = ft_substr(line, first_num, (*i) - first_num);
+			(*i)++;
 			break ;
 		}
 		(*i)++;
 	}
-	if (line[*i] == '\'')
-		(*i)++;
+	//if (line[*i] == '\'')
+	//	(*i)++;
 	ptr = other_word(i, line, ptr);
 	return (ptr);
 }
 
-char	*ft_export_push(char *temp, char **arg_envp, t_envlist *envlist)
+char	*ft_export_push(char *temp, t_envlist *envlist)
 {
 	int	i;
 	int	j;
@@ -96,17 +98,17 @@ char	*ft_export_push(char *temp, char **arg_envp, t_envlist *envlist)
 				while (envp[i][j] != '\0')
 					j++;
 				ret = ft_substr(envp[i], first_num, j);
-				clear_env(envp);
+				delete_all_env(envp);
 				return (ret);
 			}
 		}
 		i++;
 	}
-	clear_env(envp);
+	delete_all_env(envp);
 	return (ft_strdup(""));
 }
 
-char	*ft_export_ptr(char *line, int *i, char **envp, t_envlist *envlist)
+char	*ft_export_ptr(char *line, int *i, t_envlist *envlist)
 {
 	char	*temp;
 	char	*ret;
@@ -128,7 +130,7 @@ char	*ft_export_ptr(char *line, int *i, char **envp, t_envlist *envlist)
 		if (line[*i + 1] == ' ' || line[*i + 1] == '\t' || line[*i + 1] == '\"' || line[*i + 1] == '\0' || line[*i + 1] == '$')
 		{
 			temp = ft_substr(line, first_num, *i + 1 - first_num);
-			ret = ft_export_push(temp, envp, envlist);
+			ret = ft_export_push(temp, envlist);
 			break ;
 		}
 		(*i)++;
@@ -136,7 +138,7 @@ char	*ft_export_ptr(char *line, int *i, char **envp, t_envlist *envlist)
 	return (ret);
 }
 
-char	*ft_double_qoute_check(char *line, int *i, char **envp, t_envlist *envlist)
+char	*ft_double_qoute_check(char *line, int *i, t_envlist *envlist)
 {
 	(*i)++;
 	int		first_num;
@@ -177,12 +179,12 @@ char	*ft_double_qoute_check(char *line, int *i, char **envp, t_envlist *envlist)
 			}
 			if (!ptr)
 			{
-				ptr = ft_strdup(ft_export_ptr(line, i, envp, envlist));
+				ptr = ft_strdup(ft_export_ptr(line, i, envlist));
 				first_num = (*i) + 1;
 			}
 			else
 			{
-				temp = ft_strdup(ft_export_ptr(line, i, envp, envlist));
+				temp = ft_strdup(ft_export_ptr(line, i, envlist));
 				ptr = ft_strjoin(ptr, temp);
 				free(temp);
 				first_num = (*i) + 1;
@@ -193,6 +195,7 @@ char	*ft_double_qoute_check(char *line, int *i, char **envp, t_envlist *envlist)
 	ptr = other_word(i, line, ptr);
 	return (ptr);
 }
+
 static char *other_word(int *i, char *line, char *ptr)
 {
 	char *line_temp;
@@ -215,6 +218,7 @@ static char *other_word(int *i, char *line, char *ptr)
 	}
 	return (ptr);
 }
+
 char	*ft_alpha_digit(char *line, int *i)
 {
 	char	*ptr;
@@ -289,7 +293,7 @@ char	*ft_option(char	*line, int *i)
 	return (ptr);
 }
 
-char	*ft_space(char *line, int *i)
+char	*ft_space(int *i)
 {
 	char	*ptr;
 
@@ -298,7 +302,7 @@ char	*ft_space(char *line, int *i)
 	return (ptr);
 }
 
-void	ft_in_pipe(char *line, char **envp, t_tokken_list **tokken, t_envlist *envlist)
+void	ft_in_pipe(char *line, t_tokken_list **tokken, t_envlist *envlist)
 {
 	int		i;
 
@@ -307,18 +311,16 @@ void	ft_in_pipe(char *line, char **envp, t_tokken_list **tokken, t_envlist *envl
 	{
 		if (line[i] == '<' || line[i] == '>')
 			ft_lstadd_back(tokken, ft_lstnew(ft_redirection_check(line, &i), N_REDIRECTION));
-		else if (line[i] == 39) // single_qoute
+		else if (line[i] == '\'') // single_qoute
 			ft_lstadd_back(tokken, ft_lstnew(ft_single_qoute_check(line, &i), N_WORD));
-		else if (line[i] == 34) // double_qoute
-			ft_lstadd_back(tokken, ft_lstnew(ft_double_qoute_check(line, &i, envp, envlist), N_WORD));
+		else if (line[i] == '\"') // double_qoute
+			ft_lstadd_back(tokken, ft_lstnew(ft_double_qoute_check(line, &i, envlist), N_WORD));
 		else if (line[i] == '$')
-			ft_lstadd_back(tokken, ft_lstnew(ft_export_ptr(line, &i, envp, envlist), N_WORD));
+			ft_lstadd_back(tokken, ft_lstnew(ft_export_ptr(line, &i, envlist), N_WORD));
 		else if (line[i] == '|')
 			ft_lstadd_back(tokken, ft_lstnew(ft_strdup("|"), N_PIPE));
 		else if (ft_is_alpha(line[i]) || ft_is_digit(line[i]))
 			ft_lstadd_back(tokken, ft_lstnew(ft_alpha_digit(line, &i), N_WORD));
-		//else if (line[i] == '-')
-		//	ft_lstadd_back(tokken, ft_lstnew(ft_option(line, &i), N_WORD));
 		else if (line[i] == ' ' || line[i] == '\t')
 		{
 			i++;
@@ -330,15 +332,11 @@ void	ft_in_pipe(char *line, char **envp, t_tokken_list **tokken, t_envlist *envl
 
 void	ft_tokenizer(char *line, char **envp, t_envlist *envlist)
 {
-	t_flag	flag;
 	t_tokken_list	*tokken;
 	t_tokken_list	*lst;
-	t_val	val;
 
 	tokken = NULL;
-	//ft_qoute_check(line, envp, &flag);
-	//write(1, "\n", 1);
-	ft_in_pipe(line, envp, &tokken, envlist);
+	ft_in_pipe(line, &tokken, envlist);
 
 	int	i = 0;
 	lst = tokken;
@@ -348,5 +346,7 @@ void	ft_tokenizer(char *line, char **envp, t_envlist *envlist)
 		lst = lst->next;
 		i++;
 	}
+	if (check_token(tokken) == 1)
+		return ;
 	ft_paser_manager(tokken, envp, envlist);
 }

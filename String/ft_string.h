@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:24:32 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 05:28:00 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/30 16:51:30 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ char	*ft_strdup(const char *s);
 //ft_string2
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
+int		ft_atoi(const char *nptr);
 #endif

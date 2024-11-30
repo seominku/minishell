@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_libft.c                                         :+:      :+:    :+:   */
+/*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 18:47:45 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/30 19:48:23 by mku              ###   ########.fr       */
+/*   Created: 2024/11/24 19:37:01 by mku               #+#    #+#             */
+/*   Updated: 2024/11/24 22:00:20 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
+#ifndef TOKENIZER_H
+# define TOKENIZER_H
 
-int	ft_is_alpha(char c)
-{
-	if ((c >= 64 && c <= 90) || \
-	(c >= 97 && c <= 122) || \
-	c == 46 || c == 47 || \
-	c == '=' || c == '~' || \
-	c == '-' || c == '?')
-		return (1);
-	return(0);
-}
+#define ERROR 1
+#define NO_ERROR 0
+#define SINGLE_PIPE 1
+#define DOUBLE_PIPE 2
+#define BRACE 3
+#define SAME 0
 
-int	ft_is_digit(char c)
-{
-	if ((c >= 48 && c <= 57))
-		return (1);
-	return(0);
-}
+typedef struct s_tokken_list t_tokken_list;
+int	check_token(t_tokken_list *tokken);
+
+#endif

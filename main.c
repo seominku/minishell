@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:02:13 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/23 06:46:07 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/25 22:01:17 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	get_envlist(char **envp, t_envlist **envlist)
 int main(int ac, char **av, char **envp)
 {
 	char	*line;
-	char	*temp;
 	t_envlist	*envlist;
 
 	envlist = NULL;

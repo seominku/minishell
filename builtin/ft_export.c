@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:45:40 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 10:05:55 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/30 19:06:12 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static int	check_variable(char *content)
 
 	i = 0;
 	if (ft_is_digit(content[0]) || content[0] == '=')
+		return (NO_IDENTYFIER);
+	if (check_special(content))
 		return (NO_IDENTYFIER);
 	if (content[ft_strlen(content) - 1] == '=')
 		return (NAME_AND_EQUAL);

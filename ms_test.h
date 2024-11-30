@@ -3,6 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -31,7 +32,6 @@ typedef struct s_tokken_list
 	t_node_type	node_type;
 	struct s_tokken_list	*next;
 }					t_tokken_list, t_envlist;
-
 typedef struct s_list
 {
 	void			*content;
@@ -75,11 +75,11 @@ void	ft_lstclear(t_tokken_list **lst);
 
 //token
 void	ft_tokenizer(char *line, char **envp, t_envlist *envlist);
-void	ft_in_pipe(char *line, char **envp, t_tokken_list **tokken, t_envlist *envlist);
+void	ft_in_pipe(char *line, t_tokken_list **tokken, t_envlist *envlist);
 char	*ft_alpha_digit(char *line, int *i);
-char	*ft_double_qoute_check(char *line, int *i, char **envp, t_envlist *envlist);
-char	*ft_export_ptr(char *line, int *i, char **envp, t_envlist *envlist);
-char	*ft_export_push(char *temp, char **envp, t_envlist *envlist);
+char	*ft_double_qoute_check(char *line, int *i, t_envlist *envlist);
+char	*ft_export_ptr(char *line, int *i, t_envlist *envlist);
+char	*ft_export_push(char *temp, t_envlist *envlist);
 char	*ft_single_qoute_check(char *line, int *i);
 char	*ft_redirection_check(char *line, int *i);
 char	*ft_option(char	*line, int *i);
@@ -124,6 +124,7 @@ void	ft_find_cmd(t_tokken_list *tokken, t_val *val);
 void	ft_dup(t_val *val, char **envp, int *pipe, t_envlist *envlist);
 void	ft_find_pipe(t_tokken_list *tokken, t_val *val, int *pipefd);
 void	ft_find_redir(t_tokken_list **tokken, t_val *val);
+
 int	ft_next_pipe(t_tokken_list *tokken);
 
 //heredoc
@@ -133,12 +134,11 @@ void	ft_first_heredoc(t_tokken_list **tokken, t_val *val);
 void	ft_push_first_doc(t_tokken_list **tokken, t_val *val);
 
 //ft_itoa
-static int	ft_ditcheck(int n);
+//static int	ft_ditcheck(int n);
 char	*ft_itoa(int n);
-
 //ft_env_utils
 char	**convert_env(t_envlist *envlist);
-void	clear_env(char **env);
+void	delete_all_env(char **env);
 
 void	handler(int sig);
 

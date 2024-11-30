@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 20:25:40 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/23 03:34:13 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/24 19:13:33 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_heredoc(t_tokken_list **tokken, t_val *val)
 			ft_push_doc(tokken, val);
 		(*tokken) = (*tokken)->next;
 	}
-
 	(*tokken) = head;
 }
 

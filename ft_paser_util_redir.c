@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:11:47 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/23 03:34:46 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/24 16:32:09 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	ft_redir_open(t_tokken_list *lst, t_val *val, t_tokken_list **tokken)
 		error("redir error", 1);
 	val->fd_in = open(file, O_RDONLY);
 	if (val->fd_in < 0)
-		error("output error", 1);
+	{
+		write(1, "input error\n", 12);
+		return ;
+	}
 	while ((*tokken) && ft_strncmp((*tokken)->content, "<", 1))
 		(*tokken) = (*tokken)->next;
 	while ((*tokken) && ft_strncmp((*tokken)->content, "|", 1))

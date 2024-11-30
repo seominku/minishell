@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:47:34 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/22 22:48:44 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/24 16:10:46 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_tokken_list	*ft_lstnew(char *content, t_node_type type)
 	if (!p)
 		return (NULL);
 	p -> content = content;
-	p -> next = (NULL);
 	p -> node_type = type;
+	p -> next = (NULL);
 	return (p);
 }
 

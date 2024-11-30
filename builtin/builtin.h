@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:26 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 09:15:23 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/30 19:57:37 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define FALSE 0
 # define ARG_ERROR 1
 # define NO_OPTION 0
-# define YES_OPTION 1
 //export
 # define NO_IDENTYFIER 1
 # define NAME_ONLY 2
@@ -28,6 +27,10 @@
 # define FULL_ENV 4
 
 typedef struct s_tokken_list t_tokken_list,t_envlist;
+typedef struct s_exit_status
+{
+	int	status;
+}t_exit_status;
 //change_directory
 int			builtin_cd(t_tokken_list *tokken, t_envlist *envlist);
 char		*find_home_dir(t_envlist *envlist);
@@ -44,6 +47,7 @@ void		variable_error(char *content);
 t_envlist	*find_env(char *content, t_envlist *envlist);
 char		**sort_export(t_envlist *envlist);
 void		print_export(char **env);
+int			check_special(char *content);
 //exit
 int			builtin_exit(t_tokken_list *tokken, t_envlist *envlist);
 //builtin

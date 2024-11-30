@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:04:20 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 04:07:11 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/24 16:25:27 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**convert_env(t_envlist *envlist)
 	return (result);
 }
 
-void	clear_env(char **env)
+void	delete_all_env(char **env)
 {
 	int	i;
 

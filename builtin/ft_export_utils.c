@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 01:33:10 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 09:15:16 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/26 17:44:02 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,26 @@ void	print_export(char **env)
 	i = 0;
 	while (env[i] != NULL)
 	{
+		write(1, "declare -x ", 11);
 		write(1, env[i], ft_strlen(env[i]));
 		write(1, "\n", 2);
 		i++;
 	}
-	clear_env(env);
+	delete_all_env(env);
+}
+
+int	check_special(char *content)
+{
+	int	i;
+
+	i = 0;
+	while (content[i] != '\0' && content[i] != '=')
+	{
+		if ((content[i] >= 'a' && content[i] <= 'z') || \
+		(content[i] >= 'A' && content[i] <= 'Z'))
+			i++;
+		else
+			return (NO_IDENTYFIER);
+	}
+	return (0);
 }

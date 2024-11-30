@@ -6,7 +6,7 @@
 #    By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:48:53 by seojang           #+#    #+#              #
-#    Updated: 2024/11/23 04:50:23 by mku              ###   ########.fr        #
+#    Updated: 2024/11/30 19:57:50 by mku              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 .DEFAULT_GOAL := all
 
 CC = cc
+CFLAGS = -g
 RM = rm -rf
 
 SRC = main.c \
@@ -43,15 +44,15 @@ SRC = main.c \
 	./builtin/ft_export_utils.c\
 	./builtin/ft_exit.c\
 	./builtin/ft_echo.c\
-	./builtin/ft_unset.c
+	./builtin/ft_unset.c\
+	./Tokenizer/ft_check_token.c
 
 HEADER =	ms_test.h\
 		./String/ft_string.h\
 		./builtin/builtin.h\
+		./Tokenizer/tokenizer.h
 
 OBJ_S = $(SRC_S:.c=.o)
-
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
 NAME = minishell
 
@@ -59,11 +60,11 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME) : $(OBJ)
-	$(CC) $(OBJ) -lreadline -o $@
-
 %.o : %.c
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME) : $(OBJ)
+	$(CC) $(CFLAGS)  $(OBJ) -lreadline -o $@
 
 clean :
 	$(RM) $(OBJ)

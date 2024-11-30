@@ -6,13 +6,14 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:13:15 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/23 08:11:11 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/24 19:16:13 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_test.h"
 #include "String/ft_string.h"
 #include "builtin/builtin.h"
+
 void	free_path(char **paths)
 {
 	int	i;
@@ -65,6 +66,7 @@ char *find_path(char *argv, const char *env)
 	paths = ft_split(env, ':');
 	command = ft_strdup(argv);
 	i = 0;
+
 	if (access(command, F_OK | X_OK) == 0)
 	{
 		path = ft_strdup(command);
@@ -93,8 +95,9 @@ void execute_cmd(t_tokken_list *tokken, char **envp, t_envlist *envlist)
 	char **argv = NULL;
 	char *path = NULL;
 	int arg_count = 0;
-	char	**envarr;
+	char **c_env;
 
+	c_env = convert_env(envlist);
 	if (ft_builtin(tokken, envlist))
 		exit(1);
 	if (!tokken)
@@ -129,11 +132,10 @@ void execute_cmd(t_tokken_list *tokken, char **envp, t_envlist *envlist)
 		}
 	}
 	argv[arg_count] = NULL;
-	envarr = convert_env(envlist);
+
 	path = find_path(argv[0], env[0]);
 	if (!path)
 		error(argv[0], 3);
-	print_env(tokken);
-	execve(path, argv, envarr);
+	execve(path, argv, c_env);
 	error("execve failed", 2);
 }

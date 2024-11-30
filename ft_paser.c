@@ -6,23 +6,22 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:08:50 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/23 08:47:16 by mku              ###   ########.fr       */
+/*   Updated: 2024/11/24 16:36:05 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_test.h"
-#include "builtin/builtin.h"
 #include "String/ft_string.h"
-
+#include "builtin/builtin.h"
 void	ft_paser_func(t_tokken_list **tokken, t_val *val, int *pipefd)
 {
 	ft_val_set(*tokken, val);
-	ft_find_pipe(*tokken, val, pipefd);
+	//ft_find_pipe(*tokken, val, pipefd);
 	ft_find_redir(tokken, val);
 	ft_find_cmd(*tokken, val);
 }
 
-void	ft_paser_manager(t_tokken_list *tokken, char **envp, t_envlist * envlist)
+void	ft_paser_manager(t_tokken_list *tokken, char **envp, t_envlist *envlist)
 {
 	pid_t pid;
 	t_val val;
@@ -41,6 +40,8 @@ void	ft_paser_manager(t_tokken_list *tokken, char **envp, t_envlist * envlist)
 			ft_heredoc(&tokken, &val);
 		here_flag++;
 	}
+	if (ft_no_pipe_builtin(tokken, envlist))
+			return ;
 	while (tokken)
 	{
 		if (ft_next_pipe(tokken))
@@ -54,23 +55,22 @@ void	ft_paser_manager(t_tokken_list *tokken, char **envp, t_envlist * envlist)
 			pipefd[1] = -1;
 		}
 		ft_paser_func(&tokken, &val, pipefd);
-		if (ft_no_pipe_builtin(tokken, envlist))
-			return ;
 		pid = fork();
 		if (pid < 0)
 			error("Fork error", 1);
 		else if (pid == 0)
 		{
+			printf("fd in값 {%d} fd out값 {%d} token값 {%s}\n",  val.fd_in, val.fd_out, tokken->content);
 			if (prev_pipe != -1)
 			{
 				dup2(prev_pipe, STDIN_FILENO);
 				close(prev_pipe);
 			}
-			// if (pipefd[1] != -1)
-			// {
-			// 	dup2(pipefd[1], STDOUT_FILENO);
-			// 	close(pipefd[1]);
-			// }
+			if (pipefd[1] != -1)
+			{
+				dup2(pipefd[1], STDOUT_FILENO);
+				close(pipefd[1]);
+			}
 			if (pipefd[0] != -1)
 				close(pipefd[0]);
 			ft_dup(&val, envp, pipefd, envlist);
