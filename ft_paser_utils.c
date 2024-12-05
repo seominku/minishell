@@ -6,12 +6,11 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:15:18 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/24 16:32:48 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/03 16:59:08 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_test.h"
-#include "String/ft_string.h"
 
 void	error(char *s, int num)
 {
@@ -28,7 +27,7 @@ void	error(char *s, int num)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_val_set(t_tokken_list *tokken, t_val *val)
+void	ft_val_set(t_val *val)
 {
 	val->fd_in = -1;
 	val->fd_out = -1;
@@ -37,7 +36,7 @@ void	ft_val_set(t_tokken_list *tokken, t_val *val)
 	//val->tokken_len = ft_lst_len(tokken);
 }
 
-void	ft_dup(t_val *val, char **envp, int *pipefd, t_envlist *envlist)
+void	ft_dup(t_val *val, char **envp, int *pipefd)
 {
 	if (!val->cmd)
 		exit(EXIT_FAILURE);
@@ -59,6 +58,6 @@ void	ft_dup(t_val *val, char **envp, int *pipefd, t_envlist *envlist)
 		close(pipefd[1]);
 		close(val->fd_out);
 	}
-	execute_cmd(val->cmd, envp, envlist);
+	execute_cmd(val->cmd, envp);
 	exit(EXIT_FAILURE);
 }

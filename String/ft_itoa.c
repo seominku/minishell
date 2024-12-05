@@ -6,12 +6,11 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 23:02:01 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/24 16:32:59 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/03 17:57:49 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
-#include "String/ft_string.h"
+#include "ft_string.h"
 
 static int	ft_ditcheck(int n)
 {

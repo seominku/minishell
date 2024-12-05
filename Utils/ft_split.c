@@ -6,14 +6,14 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 21:37:09 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/24 16:31:52 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/03 22:23:03 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
-#include "String/ft_string.h"
+#include "../ms_test.h"
+#include "utils.h"
 
-void	flag1_case(t_word *word, char s, char c)
+static void	flag1_case(t_word *word, char s, char c)
 {
 	if (word->single_quote_flag == 0 && s == '\'')
 		word->single_quote_flag = 1;
@@ -26,7 +26,7 @@ void	flag1_case(t_word *word, char s, char c)
 	}
 }
 
-int	count_words(const char *s, char c)
+static int	count_words(const char *s, char c)
 {
 	t_word	word;
 
@@ -49,7 +49,7 @@ int	count_words(const char *s, char c)
 	return (word.count);
 }
 
-void	end_of_word(const char **s, char c, t_word *word)
+static void	end_of_word(const char **s, char c, t_word *word)
 {
 	if (**s == '\'' || **s == '\"')
 	{
@@ -75,7 +75,7 @@ void	end_of_word(const char **s, char c, t_word *word)
 		word->end --;
 }
 
-char	**split(const char *s, char c, int size, char **p)
+static char	**split(const char *s, char c, int size, char **p)
 {
 	t_word	word;
 	int		i;

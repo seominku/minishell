@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:10 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 08:43:10 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/01 16:22:51 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ char	*find_home_dir(t_envlist *envlist)
 			return (ft_substr(list->content, 5, ft_strlen(list->content)));
 		list = list->next;
 	}
+	write(2, "cd: HOME not set\n", 17);
 	return (NULL);
 }
 
-void	change_pwd(t_envlist *envlist, char *path)
+void	change_pwd(t_envlist *envlist)
 {
 	t_envlist	*list;
-	char		*old_pwd;
 	char		*temp;
 	char		*pwd;
 
@@ -44,6 +44,7 @@ void	change_pwd(t_envlist *envlist, char *path)
 			temp = list->content;
 			list->content = ft_strjoin(ft_strdup("PWD="), pwd);
 			free(pwd);
+			free(temp);
 			return ;
 		}
 		list = list->next;
@@ -66,7 +67,6 @@ void	change_oldpwd(t_envlist *envlist, char *path)
 			temp = list->content;
 			list->content = ft_strjoin(ft_strdup("OLDPWD="), path);
 			free(temp);
-			free(path);
 			return ;
 		}
 		list = list->next;

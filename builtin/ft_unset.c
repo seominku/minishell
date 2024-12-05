@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 05:30:51 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/01 15:33:32 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void				remove_node(char *content, t_envlist *envlist);
 int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist)
 {
 	t_tokken_list	*node;
-	char			**env;
 
 	node = check_unset(tokken);
 	if (node == NULL)

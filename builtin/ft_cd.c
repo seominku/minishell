@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:07 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 03:38:13 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/01 16:23:39 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	home_path(char *path, t_envlist *envlist);
 int	builtin_cd(t_tokken_list *tokken, t_envlist *envlist)
 {
 	char	*path;
-	char	*home_dir;
-	char	*old_pwd;
 
 	path = find_cd_command(tokken);
 	if (path == NULL)
@@ -52,9 +50,8 @@ static char	*find_cd_command(t_tokken_list *tokken)
 	{
 		if (!ft_strncmp(list->content, "cd", 2))
 		{
-			if ((list->next == NULL) || \
-			(list->next->node_type != N_WORD) && \
-			((list->next->node_type != N_ENV)))
+			if (list->next == NULL || \
+			(list->next->node_type != N_WORD && list->next->node_type != N_ENV))
 				return (ft_strdup("~"));
 			else if (list->next->content[0] == '\0')
 				return (ft_strdup("~"));
@@ -68,8 +65,6 @@ static char	*find_cd_command(t_tokken_list *tokken)
 
 static void	absolute_path(char *path, t_envlist *envlist)
 {
-	t_envlist	*pwd;
-	t_envlist	*oldpwd;
 	char		*temp;
 	char		*old_pwd;
 
@@ -80,8 +75,9 @@ static void	absolute_path(char *path, t_envlist *envlist)
 	else
 	{
 		change_oldpwd(envlist, old_pwd);
-		change_pwd(envlist, path);
+		change_pwd(envlist);
 	}
+	free(old_pwd);
 	free(temp);
 }
 
@@ -103,8 +99,9 @@ static void	relative_path(char *path, t_envlist *envlist)
 	else
 	{
 		change_oldpwd(envlist, old_pwd);
-		change_pwd(envlist, join_path);
+		change_pwd(envlist);
 	}
+	free(old_pwd);
 	free(join_path);
 }
 
@@ -115,9 +112,15 @@ static void	home_path(char *path, t_envlist *envlist)
 
 	old_pwd = getcwd(NULL, 0);
 	home_dir = find_home_dir(envlist);
+	if (home_dir == NULL)
+	{
+		free(old_pwd);
+		return ;
+	}
 	if (chdir(home_dir))
 		cd_error(path);
 	change_oldpwd(envlist, old_pwd);
-	change_pwd(envlist, home_dir);
+	change_pwd(envlist);
 	free(home_dir);
+	free(old_pwd);
 }

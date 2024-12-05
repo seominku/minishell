@@ -6,13 +6,12 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:13:15 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/24 19:16:13 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/03 22:23:30 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_test.h"
-#include "String/ft_string.h"
-#include "builtin/builtin.h"
+#include "Utils/utils.h"
 
 void	free_path(char **paths)
 {
@@ -35,10 +34,11 @@ void	ft_find_cmd(t_tokken_list *tokken, t_val *val)
 		if (tokken->content != NULL && ft_strlen(tokken->content) != 0)
 		{
 			val->cmd = tokken;
-			break ;
+			return ;
 		}
 		tokken = tokken->next;
 	}
+	exit(1);
 }
 
 char	*store_path(char **envp)
@@ -61,6 +61,7 @@ char *find_path(char *argv, const char *env)
 	char **paths;
 	char *command;
 	char *path;
+	char	*temp;
 	int i;
 
 	paths = ft_split(env, ':');
@@ -75,7 +76,8 @@ char *find_path(char *argv, const char *env)
 	{
 		while (paths[i])
 		{
-			path = ft_strjoin(paths[i], "/");
+			temp = ft_strdup(paths[i]);
+			path = ft_strjoin(temp, "/");
 			path = ft_strjoin(path, command);
 			if (access(path, F_OK | X_OK) == 0)
 				break;
@@ -84,42 +86,35 @@ char *find_path(char *argv, const char *env)
 			i++;
 		}
 	}
-	//free_path(paths);
-	//free(command);
+	free_path(paths);
+	free(command);
 	return path;
 }
 
-void execute_cmd(t_tokken_list *tokken, char **envp, t_envlist *envlist)
+void execute_cmd(t_tokken_list *tokken, char **envp)
 {
 	char *const env[] = {store_path(envp), NULL};
 	char **argv = NULL;
 	char *path = NULL;
 	int arg_count = 0;
-	char **c_env;
 
-	c_env = convert_env(envlist);
-	if (ft_builtin(tokken, envlist))
-		exit(1);
-	if (!tokken)
-		error("Invalid command or environment", 1);
-	if (!tokken || !tokken->content || !envp)
-		error("Invalid command or environment", 1);
-	t_tokken_list *temp = tokken;
-	while (temp && temp->content && ft_strncmp(temp->content, "|", 1) != 0 \
-	&& ft_strncmp(temp->content, ">", 1) != 0 \
-	&& ft_strncmp(temp->content, ">>", 2) != 0 \
-	&& ft_strncmp(temp->content, "<", 1) != 0)
+	// if (!tokken)
+	// 	error("Invalid command or environment", 1);
+	// if (!tokken || !tokken->content || !envp)
+	// 	error("Invalid command or environment", 1);
+	t_tokken_list *head = tokken;
+	while (tokken && ft_strncmp(tokken->content, "|", 1))
 	{
-		if (!ft_strlen(temp->content));
+		if (!ft_strlen(tokken->content));
 		else
 			arg_count++;
-		temp = temp->next;
+		tokken = tokken->next;
 	}
-
 	argv = malloc(sizeof(char *) * (arg_count + 1));
 	if (!argv)
 		error("Memory allocation failed", 2);
 	int	i = 0;
+	tokken = head;
 	while (i < arg_count)
 	{
 		if (!ft_strlen(tokken->content))
@@ -134,8 +129,9 @@ void execute_cmd(t_tokken_list *tokken, char **envp, t_envlist *envlist)
 	argv[arg_count] = NULL;
 
 	path = find_path(argv[0], env[0]);
+	//printf("cmd = %s\n", path);
 	if (!path)
 		error(argv[0], 3);
-	execve(path, argv, c_env);
+	execve(path, argv, envp);
 	error("execve failed", 2);
 }

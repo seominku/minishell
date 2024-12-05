@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_libft.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 17:45:45 by mku               #+#    #+#             */
-/*   Updated: 2024/12/01 15:31:57 by mku              ###   ########.fr       */
+/*   Created: 2024/09/09 18:47:45 by seojang           #+#    #+#             */
+/*   Updated: 2024/12/03 21:47:36 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ms_test.h"
-#include "builtin.h"
-#include "../String/ft_string.h"
-
-int	builtin_pwd(t_tokken_list *tokken)
+int	ft_is_alpha(char c)
 {
-	t_tokken_list	*list;
-	char			*pwd;
+	if ((c >= 64 && c <= 90) || (c >= 97 && c <= 122) || \
+	c == 46 || c == 47 || c == '=' || \
+	c == '~' || c == '$' || c == '\"' || c == '\'')
+		return (1);
+	return(0);
+}
 
-	list = tokken;
-	while (list != NULL)
-	{
-		if (!ft_strncmp(list->content, "pwd", 3))
-		{
-			pwd = getcwd(NULL, 0);
-			write(1, pwd, ft_strlen(pwd));
-			write(1, "\n", 2);
-			free(pwd);
-			return (1);
-		}
-		list = list->next;
-	}
-	return (0);
+int	ft_is_digit(char c)
+{
+	if ((c >= 48 && c <= 57))
+		return (1);
+	return(0);
 }

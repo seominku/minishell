@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 02:28:46 by seojang           #+#    #+#             */
-/*   Updated: 2024/09/09 18:00:27 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:13:44 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
+#include "../ms_test.h"
 
 void	ft_free(char **p, int sz)
 {

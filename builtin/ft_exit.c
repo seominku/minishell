@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:23:30 by mku               #+#    #+#             */
-/*   Updated: 2024/11/30 19:58:29 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/01 15:32:30 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int				check_exit_arg(char *content);
 static t_tokken_list	*find_exit(t_tokken_list *tokken);
 static void				print_error_arg(char *content);
 
-int	builtin_exit(t_tokken_list *tokken, t_envlist *envlist)
+int	builtin_exit(t_tokken_list *tokken)
 {
 	int				status;
 	int				count;

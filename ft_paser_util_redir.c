@@ -6,12 +6,11 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:11:47 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/24 16:32:09 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/03 16:58:54 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_test.h"
-#include "String/ft_string.h"
 
 void	ft_find_redir(t_tokken_list **tokken, t_val *val)
 {
@@ -37,6 +36,8 @@ void	ft_find_redir(t_tokken_list **tokken, t_val *val)
 			else if (!ft_strncmp(lst->content, "<<", 2) && ft_strlen(lst->content) == 2)
 			{
 				ft_redir_here(lst, val, tokken);
+				if (val->here_sig == 1)
+					return ;
 			}
 			else if (!ft_strncmp(lst->content, "|", 1))
 				break ;
@@ -68,6 +69,7 @@ void	ft_redir_open(t_tokken_list *lst, t_val *val, t_tokken_list **tokken)
 		(*tokken) = (*tokken)->next;
 	while ((*tokken) && ft_strncmp((*tokken)->content, "|", 1))
 	{
+		free((*tokken)->content);
 		(*tokken)->content = ft_strdup("");
 		(*tokken) = (*tokken)->next;
 		i++;
@@ -98,6 +100,7 @@ void	ft_redir_out(t_tokken_list *lst, t_val *val, t_tokken_list **tokken)
 		(*tokken) = (*tokken)->next;
 	while ((*tokken) && ft_strncmp((*tokken)->content, "|", 1))
 	{
+		free((*tokken)->content);
 		(*tokken)->content = ft_strdup("");
 		(*tokken) = (*tokken)->next;
 		i++;
@@ -127,6 +130,7 @@ void	ft_redir_add(t_tokken_list *lst, t_val *val, t_tokken_list **tokken)
 		(*tokken) = (*tokken)->next;
 	while ((*tokken) && ft_strncmp((*tokken)->content, "|", 1))
 	{
+		free((*tokken)->content);
 		(*tokken)->content = ft_strdup("");
 		(*tokken) = (*tokken)->next;
 		i++;
@@ -145,18 +149,25 @@ void	ft_redir_here(t_tokken_list *lst, t_val *val, t_tokken_list **tokken)
 	i = 0;
 	head = (*tokken);
 	if (!lst->next || !lst->next->content)
-		error("redir next cmd error", 1);
+	{
+		write(1, "redir next cmd error\n", 21);
+		return ;
+	}
 	file = ft_strdup(lst->next->content);
 	if (!file || !ft_strncmp(file, "|", 1))
 		error("redir error", 1);
 	val->fd_in = open(file, O_RDONLY);
 	//printf("before heredoc file fd_in = {%d}\n", val->fd_in);
 	if (val->fd_in < 0)
-		error("output error", 1);
+	{
+		val->here_sig = 1;
+		return ;
+	}
 	while ((*tokken) && ft_strncmp((*tokken)->content, "<<", 2))
 		(*tokken) = (*tokken)->next;
 	while ((*tokken) && ft_strncmp((*tokken)->content, "|", 1))
 	{
+		free((*tokken)->content);
 		(*tokken)->content = ft_strdup("");
 		(*tokken) = (*tokken)->next;
 		i++;
@@ -164,5 +175,6 @@ void	ft_redir_here(t_tokken_list *lst, t_val *val, t_tokken_list **tokken)
 			break ;
 	}
 	unlink(file);
+	free(file);
 	(*tokken) = head;
 }

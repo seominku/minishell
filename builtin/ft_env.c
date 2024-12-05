@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:59:22 by mku               #+#    #+#             */
-/*   Updated: 2024/11/23 03:45:38 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/01 15:31:12 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ int	builtin_env(t_tokken_list *tokken, t_envlist *envlist)
 
 void	print_env(t_envlist *envlist)
 {
-	int			i;
 	t_envlist	*list;
 
 	list = envlist;
-	i = 0;
 	while (list != NULL)
 	{
 		if (list->node_type == N_ENV)

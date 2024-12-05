@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:26 by mku               #+#    #+#             */
-/*   Updated: 2024/11/30 19:57:37 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/01 15:33:22 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ typedef struct s_exit_status
 int			builtin_cd(t_tokken_list *tokken, t_envlist *envlist);
 char		*find_home_dir(t_envlist *envlist);
 void		change_oldpwd(t_envlist *envlist, char *path);
-void		change_pwd(t_envlist *envlist, char *path);
+void		change_pwd(t_envlist *envlist);
 //print_env
 int			builtin_env(t_tokken_list *tokken, t_envlist *envlist);
 //pwd
-int			builtin_pwd(t_tokken_list *tokken, t_envlist *envlist);
+int			builtin_pwd(t_tokken_list *tokken);
 void		print_env(t_envlist *envlist);
 //export
 int			builtin_export(t_tokken_list *tokken, t_envlist *envlist);
@@ -49,14 +49,14 @@ char		**sort_export(t_envlist *envlist);
 void		print_export(char **env);
 int			check_special(char *content);
 //exit
-int			builtin_exit(t_tokken_list *tokken, t_envlist *envlist);
+int			builtin_exit(t_tokken_list *tokken);
 //builtin
 int			ft_builtin(t_tokken_list *tokken, t_envlist *envlist);
 void		cd_error(char *path);
 int			check_arg(t_tokken_list *tokken);
 int			ft_no_pipe_builtin(t_tokken_list *tokken, t_envlist *envlist);
 //echo
-int			builtin_echo(t_tokken_list *tokken, t_envlist *envlist);
+int			builtin_echo(t_tokken_list *tokken);
 //unset
 int			builtin_unset(t_tokken_list *tokken, t_envlist *envlist);
 #endif

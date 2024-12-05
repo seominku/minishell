@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 03:04:20 by mku               #+#    #+#             */
-/*   Updated: 2024/11/24 16:25:27 by mku              ###   ########.fr       */
+/*   Created: 2024/12/03 18:03:45 by mku               #+#    #+#             */
+/*   Updated: 2024/12/03 22:16:28 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
-#include "String/ft_string.h"
+#include "../ms_test.h"
+#include "../String/ft_string.h"
+#include "utils.h"
 
 static int	count_env(t_envlist *envlist);
 static char	**insert_char(t_envlist *envlist, char **result, int length);

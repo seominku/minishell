@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:23:07 by mku               #+#    #+#             */
-/*   Updated: 2024/11/24 20:03:37 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/01 15:41:07 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	ft_builtin(t_tokken_list *tokken, t_envlist *envlist)
 		return (COMPLETE);
 	if (builtin_env(tokken, envlist))
 		return (COMPLETE);
-	if (builtin_pwd(tokken, envlist))
+	if (builtin_pwd(tokken))
 		return (COMPLETE);
-	if (builtin_exit(tokken, envlist))
+	if (builtin_exit(tokken))
 		return (COMPLETE);
-	if (builtin_echo(tokken, envlist))
+	if (builtin_echo(tokken))
 		return (COMPLETE);
 	if (builtin_unset(tokken, envlist))
 		return (COMPLETE);
@@ -53,6 +53,7 @@ int	ft_no_pipe_builtin(t_tokken_list *tokken, t_envlist *envlist)
 		return (COMPLETE);
 	if (builtin_unset(tokken, envlist))
 		return (COMPLETE);
-	if (builtin_exit(tokken, envlist))
+	if (builtin_exit(tokken))
 		return (COMPLETE);
+	return (FALSE);
 }

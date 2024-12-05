@@ -6,11 +6,12 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:47:34 by seojang           #+#    #+#             */
-/*   Updated: 2024/11/24 16:10:46 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/03 22:16:20 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
+#include "utils.h"
+#include "../ms_test.h"
 
 t_tokken_list	*ft_lstnew(char *content, t_node_type type)
 {
@@ -19,9 +20,9 @@ t_tokken_list	*ft_lstnew(char *content, t_node_type type)
 	p = (t_tokken_list *)malloc(sizeof(t_tokken_list));
 	if (!p)
 		return (NULL);
-	p -> content = content;
-	p -> node_type = type;
-	p -> next = (NULL);
+	p->content = content;
+	p->node_type = type;
+	p->next = (NULL);
 	return (p);
 }
 
