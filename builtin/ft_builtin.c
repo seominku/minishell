@@ -6,34 +6,32 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:23:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/01 15:41:07 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 01:35:40 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
 #include "../ms_test.h"
-#include "../String/ft_string.h"
 
-int	ft_builtin(t_tokken_list *tokken, t_envlist *envlist)
+int	ft_builtin(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 {
-	if (builtin_cd(tokken, envlist))
+	if (builtin_cd(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_export(tokken, envlist))
+	if (builtin_export(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_env(tokken, envlist))
+	if (builtin_env(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_pwd(tokken))
+	if (builtin_pwd(tokken, val))
 		return (COMPLETE);
-	if (builtin_exit(tokken))
+	if (builtin_exit(tokken, val, envlist))
 		return (COMPLETE);
-	if (builtin_echo(tokken))
+	if (builtin_echo(tokken, val))
 		return (COMPLETE);
-	if (builtin_unset(tokken, envlist))
+	if (builtin_unset(tokken, envlist, val))
 		return (COMPLETE);
 	return (FALSE);
 }
 
-int	ft_no_pipe_builtin(t_tokken_list *tokken, t_envlist *envlist)
+int	ft_no_pipe_builtin(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 {
 	t_tokken_list	*list;
 
@@ -43,17 +41,17 @@ int	ft_no_pipe_builtin(t_tokken_list *tokken, t_envlist *envlist)
 		if (list->node_type == N_PIPE)
 			return (0);
 		if (!ft_strncmp(list->content, "export", 6) && \
-		list->next != NULL && list->next->node_type == N_REDIRECTION)
+		list->next != NULL && list->next->node_type == N_RED)
 			return (0);
 		list = list->next;
 	}
-	if (builtin_cd(tokken, envlist))
+	if (builtin_cd(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_export(tokken, envlist))
+	if (builtin_export(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_unset(tokken, envlist))
+	if (builtin_unset(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_exit(tokken))
+	if (builtin_exit(tokken, val, envlist))
 		return (COMPLETE);
 	return (FALSE);
 }

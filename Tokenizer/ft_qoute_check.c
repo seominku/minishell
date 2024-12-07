@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:47:29 by mku               #+#    #+#             */
-/*   Updated: 2024/12/05 20:29:51 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/06 18:02:11 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static int	ft_single_qoute(char *line, int i);
 static int	ft_double_qoute(char *line, int i);
-static int	ft_export_check(char *line, int i, char **envp);
 
 void	ft_qoute_check(char *line)
 {

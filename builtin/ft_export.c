@@ -6,23 +6,23 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:45:40 by mku               #+#    #+#             */
-/*   Updated: 2024/11/30 19:06:12 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 01:34:52 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
-#include "builtin.h"
-#include "../String/ft_string.h"
 
 static t_tokken_list	*check_export(t_tokken_list *tokken);
-static void				add_var(t_tokken_list *tokken, t_envlist *t_envlist);
+static void				add_var(t_tokken_list *tokken, \
+t_envlist *t_envlist, int *error_flag);
 static int				check_variable(char *content);
 static void				add_list(char *content, t_envlist *envlist, int type);
 
-int	builtin_export(t_tokken_list *tokken, t_envlist *envlist)
+int	builtin_export(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 {
 	t_tokken_list	*node;
 	char			**env;
+	int				error_flag;
 
 	node = check_export(tokken);
 	if (node == NULL)
@@ -31,9 +31,14 @@ int	builtin_export(t_tokken_list *tokken, t_envlist *envlist)
 	{
 		env = sort_export(envlist);
 		print_export(env);
+		delete_all_env(env);
 	}
 	else
-		add_var(node->next, envlist);
+		add_var(node->next, envlist, &error_flag);
+	if (error_flag == 1)
+		val->exit_code = BUILTIN_ERROR;
+	else
+		val->exit_code = BUILTIN_COMPLATE;
 	return (COMPLETE);
 }
 
@@ -51,7 +56,7 @@ static t_tokken_list	*check_export(t_tokken_list *tokken)
 	return (NULL);
 }
 
-static void	add_var(t_tokken_list *tokken, t_envlist *envlist)
+static void	add_var(t_tokken_list *tokken, t_envlist *envlist, int *flag)
 {
 	t_tokken_list	*list;
 	int				type;
@@ -59,7 +64,7 @@ static void	add_var(t_tokken_list *tokken, t_envlist *envlist)
 	list = tokken;
 	while (list != NULL)
 	{
-		if (list->node_type == N_REDIRECTION)
+		if (list->node_type == N_RED)
 			list = list->next->next;
 		if (list == NULL)
 			return ;
@@ -67,7 +72,7 @@ static void	add_var(t_tokken_list *tokken, t_envlist *envlist)
 		{
 			type = check_variable(list->content);
 			if (type == NO_IDENTYFIER)
-				variable_error(list->content);
+				variable_error(list->content, flag);
 			else
 				add_list(list->content, envlist, type);
 		}

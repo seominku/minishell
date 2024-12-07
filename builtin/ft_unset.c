@@ -6,19 +6,17 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/12/01 15:33:32 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/06 18:45:33 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
 #include "../ms_test.h"
-#include "../String/ft_string.h"
 
 static t_tokken_list	*check_unset(t_tokken_list *tokken);
 static void				check_list(t_tokken_list *tokken, t_envlist *t_envlist);
 static void				remove_node(char *content, t_envlist *envlist);
 
-int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist)
+int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 {
 	t_tokken_list	*node;
 
@@ -29,6 +27,7 @@ int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist)
 		write(2, "unset: not enough arguments\n", 28);
 	else
 		check_list(node->next, envlist);
+	val->exit_code = BUILTIN_COMPLATE;
 	return (COMPLETE);
 }
 

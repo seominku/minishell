@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:03:45 by mku               #+#    #+#             */
-/*   Updated: 2024/12/03 22:16:28 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 02:03:40 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static char	**insert_char(t_envlist *envlist, char **result, int length);
 char	**convert_env(t_envlist *envlist)
 {
 	int		length;
-	char **result;
+	char	**result;
+
 	length = count_env(envlist);
 	result = (char **)malloc(sizeof(char *) * (length + 1));
 	if (result == NULL)
 		return (NULL);
 	result = insert_char(envlist, result, length);
-
 	return (result);
 }
 
@@ -42,9 +42,10 @@ void	delete_all_env(char **env)
 	}
 	free(env);
 }
+
 static int	count_env(t_envlist *envlist)
 {
-	int		count;
+	int			count;
 	t_envlist	*list;
 
 	list = envlist;
@@ -60,7 +61,7 @@ static int	count_env(t_envlist *envlist)
 static char	**insert_char(t_envlist *envlist, char **result, int length)
 {
 	t_envlist	*list;
-	int	count;
+	int			count;
 
 	count = 0;
 	list = envlist;

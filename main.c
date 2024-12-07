@@ -6,57 +6,39 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:02:13 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/05 20:35:28 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 03:53:17 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_test.h"
-#include "Tokenizer/ft_tokenizer.h"
-#include "Utils/utils.h"
 
-static void	loop_prompt(t_envlist *envlist);
-static void	get_envlist(char **envp, t_envlist **envlist);
-static int	check_line(char *line);
-void	set_error_code(int	code);
+volatile int	g_signal_flag;
+
+static void	get_envlist(char **envp, t_envlist **envlist, t_val *val);
+static void	main_set(char **line, t_val *val);
+static void	loop_prompt(char *line, t_envlist *envlist, t_val *val);
+static void	line_null(void);
+void	flag_check(t_val *val);
 
 int main(int ac, char **av, char **envp)
 {
-	t_envlist *envlist;
+	char	*line;
+	t_val	val;
+	t_envlist		*envlist;
 
-	envlist = NULL;
 	(void)ac;
 	(void)av;
-	get_envlist(envp, &envlist);
-	set_error_code(1);
-	loop_prompt(envlist);
+	envlist = NULL;
+	get_envlist(envp, &envlist, &val);
+	main_set(&line, &val);
+	while (1)
+	{
+		loop_prompt(line, envlist, &val);
+	}
 	return (0);
 }
 
-static void	loop_prompt(t_envlist *envlist)
-{
-	char	*line;
-
-	line = NULL;
-	while (1)
-	{
-		set_signal();
-		signal(SIGINT,handler);
-		line = readline("minishell>");
-		check_line(line);
-		if (!ft_strlen(line))
-			continue ;
-		if (line)
-		{
-			add_history(line);
-			ft_tokenizer(line, envlist);
-			free(line);
-			line = NULL;
-		}
-	}
-	return ;
-}
-
-static void	get_envlist(char **envp, t_envlist **envlist)
+static void	get_envlist(char **envp, t_envlist **envlist, t_val *val)
 {
 	int	i;
 
@@ -65,26 +47,53 @@ static void	get_envlist(char **envp, t_envlist **envlist)
 	{
 			ft_lstadd_back(envlist, ft_lstnew(ft_strdup(envp[i]), N_ENV));
 			if (!ft_strncmp(envp[i], "HOME", 4))
-				ft_lstadd_back(envlist, ft_lstnew(ft_strjoin(ft_strdup("temp"), \
-				ft_strdup(envp[i])), N_NULL));
+				val->home = envp[i];
 		i++;
 	}
 }
 
-static int	check_line(char *line)
+static void	main_set(char **line, t_val *val)
 {
-	if (line == NULL)
-	{
-		write(1, "exit\n", 5);
-		exit(0) ;
-	}
+	(*line) = NULL;
+	g_signal_flag = 0;
+	val->exit_code = 0;
 }
 
-void	set_error_code(int	code)
+static void	loop_prompt(char *line, t_envlist *envlist, t_val *val)
 {
-	static int	prev_code;
-	static int	now_code;
+	t_tokken_list *tokken;
 
-	prev_code = now_code;
-	now_code = code;
+	main_signal();
+	line = readline("minishell>");
+	if (line == NULL)
+		line_null();
+	else if (!ft_strlen(line))
+		;
+	else if (line)
+	{
+		add_history(line);
+		tokken = ft_tokenizer(line, envlist, val);
+		if (tokken != NULL)
+			ft_paser_manager(tokken, envlist, &val);
+	}
+	ft_lstclear(&tokken);
+	flag_check(val);
+	free(line);
+	line = NULL;
+}
+
+static void	line_null(void)
+{
+	write(1, "exit\n", 5);
+	exit(1);
+}
+
+void	flag_check(t_val *val)
+{
+	if (g_signal_flag == 1)
+	{
+		g_signal_flag = 0;
+		val->exit_code = 130;
+	}
+	printf("{%d}\n", val->exit_code);
 }

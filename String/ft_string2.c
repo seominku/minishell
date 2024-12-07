@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:25:51 by mku               #+#    #+#             */
-/*   Updated: 2024/11/30 16:51:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 01:38:20 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,24 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (result * sign);
+}
+
+char	*ft_ctos(char a)
+{
+	char	*line_temp;
+
+	line_temp = (char *)malloc(sizeof(char) * 2);
+	if (line_temp == NULL)
+		return (NULL);
+	line_temp[0] = a;
+	line_temp[1] = '\0';
+	return (line_temp);
+}
+
+int	ft_is_grammer(char c)
+{
+	if (c == '|' || c == '<' || \
+	c == '>' || c == ' ')
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 16:41:39 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/05 20:29:28 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 03:34:16 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,28 @@ static char	*ft_export_push(char *temp, t_envlist *envlist);
 static char	*find_env_var(char *temp, t_envlist *envlist);
 static int	find_equal(char *content, char *content2);
 
-char	*ft_export_ptr(char *line, int *i, t_envlist *envlist)
+char	*ft_export_ptr(char *line, int *i, t_envlist *envlist, t_val *val)
 {
 	char	*temp;
 	char	*ret;
 	int		first_num;
+	//char	exitcode;
 
 	first_num = ++(*i);
-	if (line[*i] == '\0')
-	{
-		ret = ft_strdup("$");
-		return (ret);
-	}
 	if (line[*i] == '?')
 	{
-		ret = ft_strdup("0");
+		//exitcode = (val->exit_code + '0');
+		ret = ft_itoa(val->exit_code);
 		return (ret);
 	}
 	while (line[*i])
 	{
-		if (line[*i + 1] == ' ' || line[*i + 1] == '\t' || line[*i + 1] == '"' || line[*i + 1] == '\0' || line[*i + 1] == '$')
+		if (line[*i + 1] == ' ' || line[*i + 1] == '\t' || \
+		line[*i + 1] == '"' || line[*i + 1] == '\0' || line[*i + 1] == '$')
 		{
 			temp = ft_substr(line, first_num, *i + 1 - first_num);
 			ret = ft_export_push(temp, envlist);
+			free(temp);
 			break ;
 		}
 		(*i)++;

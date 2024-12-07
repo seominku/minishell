@@ -11,13 +11,14 @@
 # include <signal.h>
 # include "Signal/ft_signal.h"
 # include "String/ft_string.h"
+# include "Tokenizer/ft_tokenizer.h"
+# include "Utils/utils.h"
+# include "builtin/builtin.h"
+# include "Paser/paser.h"
 
+# define EXIT_NORMAL_ERR 1
 
-
-typedef struct s_flag
-{
-	int	pipe;
-}	t_flag;
+extern volatile int	g_signal_flag;
 
 typedef enum e_node_type
 {
@@ -26,6 +27,9 @@ typedef enum e_node_type
 	N_RED,
 	N_ENV,
 	N_EXPORT_ENV,
+	N_SINGLE,
+	N_DOUBLE,
+	N_DOLLAR,
 	N_NULL
 }				t_node_type;
 
@@ -34,13 +38,7 @@ typedef struct s_tokken_list
 	char			*content;
 	t_node_type	node_type;
 	struct s_tokken_list	*next;
-}					t_tokken_list, t_envlist;
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+}					t_tokken_list, t_envlist, t_qlist, t_tlist;
 
 typedef struct s_val
 {
@@ -55,9 +53,22 @@ typedef struct s_val
 	char	*heredoc;
 	int		doc_num;
 	int		here_sig;
+	int		exit_code;
+	char	*home;
 	t_tokken_list	*head;
 	t_tokken_list	*cmd;
 }			t_val;
+
+typedef struct s_here_val
+{
+	char	*eof;
+	char	*ret;
+	char	*temp;
+	char	*file;
+	char	*doc_name;
+	char	*doc_num;
+	int		tmpfd;
+}	t_here_val;
 
 typedef struct s_word
 {
@@ -69,34 +80,6 @@ typedef struct s_word
 	const char	*start;
 	const char	*end;
 }			t_word;
-
-//ft_paser
-char	*store_path(char **envp);
-char	*find_path(char *argv, const char *env);
-void	ft_val_set(t_val *val);
-void	error(char *s, int num);
-void	execute_cmd(t_tokken_list *tokken, char **envp);
-void	ft_paser_manager(t_tokken_list *tokken, char **envp);
-void	free_path(char **paths);
-
-//redir
-void	ft_redir_open(t_tokken_list *lst, t_val *val, t_tokken_list **tokken);
-void	ft_redir_out(t_tokken_list *lst, t_val *val, t_tokken_list **tokken);
-void	ft_redir_add(t_tokken_list *lst, t_val *val, t_tokken_list **tokken);
-void	ft_redir_here(t_tokken_list *lst, t_val *val, t_tokken_list **tokken);
-
-void	ft_find_cmd(t_tokken_list *tokken, t_val *val);
-void	ft_dup(t_val *val, char **envp, int *pipe);
-void	ft_find_pipe(t_tokken_list *tokken, t_val *val, int *pipefd);
-void	ft_find_redir(t_tokken_list **tokken, t_val *val);
-
-int	ft_next_pipe(t_tokken_list *tokken);
-
-//heredoc
-void	ft_heredoc(t_tokken_list **tokken, t_val *val);
-void	ft_push_doc(t_tokken_list **tokken, t_val *val);
-void	ft_first_heredoc(t_tokken_list **tokken, t_val *val);
-void	ft_push_first_doc(t_tokken_list **tokken, t_val *val);
 
 
 #endif /* MS_TEST_H*/

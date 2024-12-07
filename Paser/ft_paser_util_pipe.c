@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_util_pipe.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:08:54 by seojang           #+#    #+#             */
-/*   Updated: 2024/10/17 17:32:41 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/08 02:11:34 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
+#include "../ms_test.h"
 
-void	ft_find_pipe(t_tokken_list *tokken, t_val *val, int *pipefd)
+void	ft_find_pipe(t_tlist *tokken, t_val *val, int *pipefd)
 {
-	t_tokken_list	*lst;
+	t_tlist	*lst;
 
 	lst = tokken;
 	while (lst)
@@ -28,9 +28,9 @@ void	ft_find_pipe(t_tokken_list *tokken, t_val *val, int *pipefd)
 	}
 }
 
-int	ft_next_pipe(t_tokken_list *tokken)
+int	ft_next_pipe(t_tlist *tokken)
 {
-	t_tokken_list	*head;
+	t_tlist	*head;
 
 	head = tokken;
 	while (tokken && tokken->next != NULL)

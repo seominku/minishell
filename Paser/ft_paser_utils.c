@@ -6,11 +6,11 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:15:18 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/03 16:59:08 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 03:14:25 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_test.h"
+#include "../ms_test.h"
 
 void	error(char *s, int num)
 {
@@ -27,37 +27,34 @@ void	error(char *s, int num)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_val_set(t_val *val)
+void	ft_val_set(t_val **val)
 {
-	val->fd_in = -1;
-	val->fd_out = -1;
-	//val->prev_pipe = -1;
-	//val->heredoc_fd = -1;
-	//val->tokken_len = ft_lst_len(tokken);
+	(*val)->fd_in = -1;
+	(*val)->fd_out = -1;
 }
 
-void	ft_dup(t_val *val, char **envp, int *pipefd)
+void	ft_dup(t_val **val, t_envlist *envlist, int *pipefd, t_tlist *tokken)
 {
-	if (!val->cmd)
+	if (!(*val)->cmd)
 		exit(EXIT_FAILURE);
-	if (val->fd_in != -1)
+	if ((*val)->fd_in != -1)
 	{
 		close(pipefd[1]);
-		if (dup2(val->fd_in, STDIN_FILENO) == -1)
+		if (dup2((*val)->fd_in, STDIN_FILENO) == -1)
 			error("in dup2 failed", 2);
 		close(pipefd[0]);
-		close(val->fd_in);
+		close((*val)->fd_in);
 	}
-//	printf("before dup2 fd_out = {%d}\n", val->fd_out);
-	//printf("현재 PID=%d outputfd값 : %d \n", getpid(), val->fd_out);
-	if (val->fd_out != -1)
+	if ((*val)->fd_out != -1)
 	{
 		close(pipefd[0]);
-		if (dup2(val->fd_out, STDOUT_FILENO) == -1)
+		if (dup2((*val)->fd_out, STDOUT_FILENO) == -1)
 			error("out dup2 failed", 2);
 		close(pipefd[1]);
-		close(val->fd_out);
+		close((*val)->fd_out);
 	}
-	execute_cmd(val->cmd, envp);
+	if (ft_builtin(tokken, envlist, *val))
+		exit(0);
+	execute_cmd((*val)->cmd, envlist);
 	exit(EXIT_FAILURE);
 }

@@ -6,16 +6,15 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 01:33:10 by mku               #+#    #+#             */
-/*   Updated: 2024/11/26 17:44:02 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/07 23:48:02 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
 #include "../ms_test.h"
-#include "../String/ft_string.h"
 
-void	variable_error(char *content)
+void	variable_error(char *content, int *flag)
 {
+	*flag = 1;
 	write(2, "export: \'", 9);
 	write(2, content, ft_strlen(content));
 	write(2, "\': not a valid identifier", 25);
@@ -29,7 +28,7 @@ t_envlist	*find_env(char *content, t_envlist *envlist)
 
 	length = 0;
 	list = envlist;
-	while (content[length] != '=' && content[length] != '\0')
+	while (content[length] != '\0' && content[length] != '=')
 		length++;
 	while (list != NULL)
 	{
@@ -70,16 +69,30 @@ char	**sort_export(t_envlist *envlist)
 void	print_export(char **env)
 {
 	int	i;
+	int	j;
+	int	flag;
 
 	i = 0;
 	while (env[i] != NULL)
 	{
+		j = 0;
+		flag = 0;
 		write(1, "declare -x ", 11);
-		write(1, env[i], ft_strlen(env[i]));
+		while (env[i][j] != '\0')
+		{
+			write(1, &(env[i][j]), 1);
+			if (env[i][j] == '=')
+			{
+				write(1, "\"", 1);
+				flag = 1;
+			}
+			j++;
+		}
+		if (flag == 1)
+			write(1, "\"", 1);
 		write(1, "\n", 2);
 		i++;
 	}
-	delete_all_env(env);
 }
 
 int	check_special(char *content)
@@ -90,7 +103,8 @@ int	check_special(char *content)
 	while (content[i] != '\0' && content[i] != '=')
 	{
 		if ((content[i] >= 'a' && content[i] <= 'z') || \
-		(content[i] >= 'A' && content[i] <= 'Z'))
+		(content[i] >= 'A' && content[i] <= 'Z') || \
+		ft_is_digit(content[i]))
 			i++;
 		else
 			return (NO_IDENTYFIER);

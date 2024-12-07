@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:47:34 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/03 22:16:20 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 02:02:45 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_lstadd_back(t_tokken_list **lst, t_tokken_list *new)
 {
 	t_tokken_list	*temp;
 
-	if (!*lst)
+	if (!(*lst))
 	{
 		*lst = new;
 		return ;
@@ -53,4 +53,19 @@ void	ft_lstclear(t_tokken_list **lst)
 		free(temp);
 	}
 	*lst = (NULL);
+}
+
+char	*join_list(t_qlist *qlist)
+{
+	char	*result;
+	t_qlist	*list;
+
+	result = ft_strdup("");
+	list = qlist;
+	while (list != NULL)
+	{
+		result = ft_strjoin(result, list->content);
+		list = list->next;
+	}
+	return (result);
 }

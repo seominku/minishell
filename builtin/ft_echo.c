@@ -6,20 +6,18 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:40:38 by mku               #+#    #+#             */
-/*   Updated: 2024/12/01 15:33:10 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/06 17:50:22 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
-#include "builtin.h"
-#include "../String/ft_string.h"
 
 static t_tokken_list	*find_echo_cmd(t_tokken_list *tokken);
 static int				find_option(t_tokken_list *tokken);
 static void				print_newline(char *content);
 static char				*sub_string(t_tokken_list *tokken);
 
-int	builtin_echo(t_tokken_list *tokken)
+int	builtin_echo(t_tokken_list *tokken, t_val *val)
 {
 	t_tokken_list	*node;
 	int				option;
@@ -44,6 +42,7 @@ int	builtin_echo(t_tokken_list *tokken)
 		string = sub_string(node);
 		print_newline(string);
 	}
+	val->exit_code = BUILTIN_COMPLATE;
 	return (COMPLETE);
 }
 

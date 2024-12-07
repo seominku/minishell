@@ -6,15 +6,13 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/01 16:22:51 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/06 19:27:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
-#include "builtin.h"
-#include "../String/ft_string.h"
 
-char	*find_home_dir(t_envlist *envlist)
+char	*find_home_dir(t_envlist *envlist, t_val *val)
 {
 	t_envlist	*list;
 
@@ -26,6 +24,7 @@ char	*find_home_dir(t_envlist *envlist)
 		list = list->next;
 	}
 	write(2, "cd: HOME not set\n", 17);
+	val->exit_code = EXIT_NORMAL_ERR;
 	return (NULL);
 }
 
@@ -75,8 +74,10 @@ void	change_oldpwd(t_envlist *envlist, char *path)
 	ft_lstnew(ft_strjoin(ft_strdup("OLDPWD="), path), N_ENV));
 }
 
-void	cd_error(char *path)
+void	cd_error(char *path, t_val *val, int *flag)
 {
+	val->exit_code = EXIT_NORMAL_ERR;
+	*flag = 0;
 	write(2, "cd : ", 5);
 	write(2, path, ft_strlen(path));
 	write(2, ": No Such file or directory", 27);

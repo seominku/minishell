@@ -6,15 +6,13 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:45:45 by mku               #+#    #+#             */
-/*   Updated: 2024/12/01 15:31:57 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/06 18:44:17 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
-#include "builtin.h"
-#include "../String/ft_string.h"
 
-int	builtin_pwd(t_tokken_list *tokken)
+int	builtin_pwd(t_tokken_list *tokken, t_val *val)
 {
 	t_tokken_list	*list;
 	char			*pwd;
@@ -28,6 +26,7 @@ int	builtin_pwd(t_tokken_list *tokken)
 			write(1, pwd, ft_strlen(pwd));
 			write(1, "\n", 2);
 			free(pwd);
+			val->exit_code = BUILTIN_COMPLATE;
 			return (1);
 		}
 		list = list->next;

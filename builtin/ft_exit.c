@@ -6,20 +6,18 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:23:30 by mku               #+#    #+#             */
-/*   Updated: 2024/12/01 15:32:30 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/06 23:43:30 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
-#include "../String/ft_string.h"
-#include "builtin.h"
 
 static int				count_arg(t_tokken_list *tokken);
 static int				check_exit_arg(char *content);
 static t_tokken_list	*find_exit(t_tokken_list *tokken);
-static void				print_error_arg(char *content);
+static void				print_error_arg(char *content, t_val *val);
 
-int	builtin_exit(t_tokken_list *tokken)
+int	builtin_exit(t_tokken_list *tokken, t_val *val, t_envlist *envlist)
 {
 	int				status;
 	int				count;
@@ -30,14 +28,17 @@ int	builtin_exit(t_tokken_list *tokken)
 		return (0);
 	status = check_exit_arg(node->next->content);
 	if (status == -1)
-		print_error_arg(node->next->content);
+		print_error_arg(node->next->content, val);
 	count = count_arg(node->next);
 	if (count > 1)
 	{
 		write(2, "exit: too many arguments\n", 25);
+		val->exit_code = BUILTIN_ERROR;
 		return (2);
 	}
 	write(1, "exit\n", 5);
+	ft_lstclear(&tokken);
+	ft_lstclear(&envlist);
 	exit(status);
 	return (0);
 }
@@ -91,10 +92,11 @@ static int	check_exit_arg(char *content)
 	return (i);
 }
 
-static void	print_error_arg(char *content)
+static void	print_error_arg(char *content, t_val *val)
 {
 	write(2, "exit: ", 6);
 	write(2, content, ft_strlen(content));
 	write(2, ": numeric argument required\n", 28);
+	val->exit_code = BUILTIN_ERROR;
 	exit(2);
 }

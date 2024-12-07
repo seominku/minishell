@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:03:44 by mku               #+#    #+#             */
-/*   Updated: 2024/12/03 18:34:17 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 02:31:25 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 # define FT_SIGNAL_H
 
 //ft_signal
-void	set_signal_quit_ig(void);
-void	set_signal_quit_ex(void);
-void	set_signal_int_ig(void);
-void	set_signal_int_ex(void);
-void	set_signal(void);
-//ft_sig_handler
-void	handler_quit(int sig);
-void	handler_int(int sig);
-void	handler(int sig);
 void	handler_here(int sig);
-void	handler_fork(int sig);
-
+void	handler(int sig);
+void	main_signal(void);
+void	ft_siganl_set(void);
+//ft_sig_handler
+void	handler_int(int sig);
+void	handler_quit(int sig);
 #endif
