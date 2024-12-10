@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/12/06 18:45:33 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:16:46 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 	node = check_unset(tokken);
 	if (node == NULL)
 		return (FAIL_TO_FIND_CMD);
-	if (node->next == NULL || node->next->node_type != N_WORD)
-		write(2, "unset: not enough arguments\n", 28);
-	else
-		check_list(node->next, envlist);
+	check_list(node->next, envlist);
 	val->exit_code = BUILTIN_COMPLATE;
 	return (COMPLETE);
 }
@@ -38,7 +35,7 @@ static t_tokken_list	*check_unset(t_tokken_list *tokken)
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "unset", 5))
+		if (!ft_strncmp(list->content, "unset", 5) && ft_strlen(list->content) == 5)
 			return (list);
 		list = list->next;
 	}

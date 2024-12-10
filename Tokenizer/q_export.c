@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   q_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:41:55 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 03:35:40 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:01:19 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static char	*check_dollar(char *content, t_envlist *envlist, t_val *val)
 
 	qlist = NULL;
 	if (content[0] == '$' && content[1] == '\0')
+	{
+		free(content);
 		return (ft_strdup("$"));
+	}
 	qlist = sub_content(content, qlist, val);
 	export_env(qlist, envlist);
 	result = join_list(qlist);

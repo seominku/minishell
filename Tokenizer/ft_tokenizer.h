@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:12:16 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 02:00:00 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 18:22:38 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # define SAME 0
 
 typedef struct s_tokken_list t_envlist,t_tokken_list,t_qlist;
-typedef struct s_val	t_val;
+typedef struct s_val		t_val;
 
 t_tokken_list	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val);
 char			*ft_export_ptr(char *line, int *i, \
 t_envlist *envlist, t_val *val);
-void			ft_qoute_check(char *line);
+int				ft_qoute_check(char *line, t_val *val);
 //ft_check_token.c
 int				check_token(t_tokken_list *tokken, t_val *val);
 //qoute.c

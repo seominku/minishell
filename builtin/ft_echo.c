@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:40:38 by mku               #+#    #+#             */
-/*   Updated: 2024/12/06 17:50:22 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:15:02 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_tokken_list	*find_echo_cmd(t_tokken_list *tokken)
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "echo", 4))
+		if (!ft_strncmp(list->content, "echo", 4) && ft_strlen(list->content) == 4)
 			return (list->next);
 		list = list->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:02:13 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 03:53:17 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/08 18:55:27 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	get_envlist(char **envp, t_envlist **envlist, t_val *val)
 	{
 			ft_lstadd_back(envlist, ft_lstnew(ft_strdup(envp[i]), N_ENV));
 			if (!ft_strncmp(envp[i], "HOME", 4))
-				val->home = envp[i];
+				val->home = envp[i] + 5;
 		i++;
 	}
 }
@@ -74,9 +74,11 @@ static void	loop_prompt(char *line, t_envlist *envlist, t_val *val)
 		add_history(line);
 		tokken = ft_tokenizer(line, envlist, val);
 		if (tokken != NULL)
+		{
 			ft_paser_manager(tokken, envlist, &val);
+			ft_lstclear(&tokken);
+		}
 	}
-	ft_lstclear(&tokken);
 	flag_check(val);
 	free(line);
 	line = NULL;

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:23:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 01:35:40 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:17:16 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	ft_no_pipe_builtin(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 		if (list->node_type == N_PIPE)
 			return (0);
 		if (!ft_strncmp(list->content, "export", 6) && \
-		list->next != NULL && list->next->node_type == N_RED)
+		list->next != NULL && list->next->node_type == N_RED && \
+		ft_strlen(list->content) == 6)
 			return (0);
 		list = list->next;
 	}

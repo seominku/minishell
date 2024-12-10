@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 01:34:35 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:21:10 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*find_cd_command(t_tokken_list *tokken)
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "cd", 2))
+		if (!ft_strncmp(list->content, "cd", 2) && ft_strlen(list->content) == 2)
 		{
 			if (list->next == NULL || \
 			(list->next->node_type != N_WORD && list->next->node_type != N_ENV))
@@ -119,6 +119,7 @@ static void	home_path(char *path, t_envlist *envlist, t_val *val, int *flag)
 	home_dir = find_home_dir(envlist, val);
 	if (home_dir == NULL)
 	{
+		*flag = 0;
 		free(old_pwd);
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:23:30 by mku               #+#    #+#             */
-/*   Updated: 2024/12/06 23:43:30 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:16:36 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_tokken_list	*find_exit(t_tokken_list *tokken)
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "exit", 4))
+		if (!ft_strncmp(list->content, "exit", 4) && ft_strlen(list->content) == 4)
 		{
 			if (list->next == NULL || list->next->node_type != N_WORD)
 				exit(0);

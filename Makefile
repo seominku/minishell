@@ -6,7 +6,7 @@
 #    By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:48:53 by seojang           #+#    #+#              #
-#    Updated: 2024/12/08 03:09:15 by mku              ###   ########.fr        #
+#    Updated: 2024/12/08 18:52:15 by mku              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRC = main.c \
 	Tokenizer/ft_check_token.c\
 	Tokenizer/qoute.c\
 	Tokenizer/qoute_utils.c\
-	Tokenizer/export.c\
+	Tokenizer/q_export.c\
 	Utils/ft_split.c \
 	Utils/ft_split_utils.c \
 	Utils/ft_lst_util.c \

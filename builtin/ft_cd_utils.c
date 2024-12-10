@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/06 19:27:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:27:17 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*find_home_dir(t_envlist *envlist, t_val *val)
 	list = envlist;
 	while (list != NULL)
 	{
-		if (!strncmp(list->content, "HOME=", 5))
+		if (!strncmp(list->content, "HOME=", 5) && ft_strlen(list->content) == 5)
 			return (ft_substr(list->content, 5, ft_strlen(list->content)));
 		list = list->next;
 	}
@@ -38,7 +38,7 @@ void	change_pwd(t_envlist *envlist)
 	list = envlist;
 	while (list != NULL)
 	{
-		if (!strncmp(list->content, "PWD=", 4))
+		if (!strncmp(list->content, "PWD=", 4) && ft_strlen(list->content) == 4)
 		{
 			temp = list->content;
 			list->content = ft_strjoin(ft_strdup("PWD="), pwd);

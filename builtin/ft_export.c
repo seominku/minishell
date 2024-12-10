@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:45:40 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 01:34:52 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:24:37 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	builtin_export(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 	char			**env;
 	int				error_flag;
 
+	error_flag = 0;
 	node = check_export(tokken);
 	if (node == NULL)
 		return (FAIL_TO_FIND_CMD);
@@ -49,7 +50,7 @@ static t_tokken_list	*check_export(t_tokken_list *tokken)
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "export", 6))
+		if (!ft_strncmp(list->content, "export", 6) && ft_strlen(list->content) == 6)
 			return (list);
 		list = list->next;
 	}
