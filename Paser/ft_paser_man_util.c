@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 22:00:01 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 16:20:44 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/10 20:44:13 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_wait_child(t_val **val, int *status)
 	}
 	else if (WIFSIGNALED(*status))
 	{
-		printf("here2\n");
 		(*val)->exit_code = WTERMSIG(*status) + 128;
 		if ((*val)->exit_code == 141)
 			(*val)->exit_code = 0;

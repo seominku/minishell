@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_test.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:22:50 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:28:28 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 20:43:36 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,28 @@ typedef enum e_node_type
 	N_DOUBLE,
 	N_DOLLAR,
 	N_NULL
-}				t_node_type;
+}	t_node_type;
 
 typedef struct s_tlist
 {
 	char			*content;
-	t_node_type	node_type;
+	t_node_type		node_type;
 	struct s_tlist	*next;
-}					t_tlist, t_envlist, t_qlist;
+}	t_tlist;
+
+typedef struct s_envlist
+{
+	char				*content;
+	t_node_type			node_type;
+	struct s_envlist	*next;
+}	t_envlist;
+
+typedef struct s_qlist
+{
+	char			*content;
+	t_node_type		node_type;
+	struct s_qlist	*next;
+}	t_qlist;
 
 typedef struct s_val
 {
@@ -62,11 +76,11 @@ typedef struct s_val
 	int		tokken_len;
 	int		redir_flag;
 	int		tmp_out;
-	char		*heredoc;
+	char	*heredoc;
 	int		doc_num;
 	int		here_sig;
 	int		exit_code;
-	char		*home;
+	char	*home;
 	t_tlist	*head;
 	t_tlist	*cmd;
 }			t_val;
@@ -92,6 +106,5 @@ typedef struct s_word
 	const char	*start;
 	const char	*end;
 }			t_word;
-
 
 #endif /* MS_TEST_H*/

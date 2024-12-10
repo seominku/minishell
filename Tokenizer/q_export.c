@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   q_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:41:55 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 17:22:36 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:31:25 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*check_dollar(char *content, t_envlist *envlist, t_val *val)
 	qlist = sub_content(content, qlist, val);
 	export_env(qlist, envlist);
 	result = join_list(qlist);
-	ft_lstclear(&qlist);
+	ft_qlstclear(&qlist);
 	free(content);
 	return (result);
 }
@@ -104,5 +104,5 @@ static void	export_env(t_qlist *qlist, t_envlist *envlist)
 
 static void	dollar_qua(t_qlist **qlist, t_val *val)
 {
-	ft_lstadd_back(qlist, ft_lstnew(ft_itoa(val->exit_code), N_WORD));
+	ft_qladd_back(qlist, ft_qlnew(ft_itoa(val->exit_code), N_WORD));
 }

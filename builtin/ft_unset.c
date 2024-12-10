@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:46:27 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
 static t_tlist	*check_unset(t_tlist *tokken);
-static void				check_list(t_tlist *tokken, t_envlist *t_envlist);
-static void				remove_node(char *content, t_envlist *envlist);
-static int				find_node(char *content, char *content2);
+static void		check_list(t_tlist *tokken, t_envlist *t_envlist);
+static void		remove_node(char *content, t_envlist *envlist);
+static int		find_node(char *content, char *content2);
 
 int	builtin_unset(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_util_exe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:13:15 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 02:54:32 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 20:42:07 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	ft_find_cmd(t_tlist *tokken, t_val **val)
 
 char	*store_path(t_envlist *envlist)
 {
-	char	*path;
-	t_envlist *list;
+	char		*path;
+	t_envlist	*list;
 
 	list = envlist;
 	while (list != NULL)
@@ -86,7 +86,7 @@ char	*find_path(char *argv, const char *env)
 void	execute_cmd(t_tlist *tokken, t_envlist *envlist)
 {
 	char *const	env[] = {store_path(envlist), NULL};
-	char	**c_env;
+	char		**c_env;
 	char		**argv;
 	char		*path;
 	int			arg_count;

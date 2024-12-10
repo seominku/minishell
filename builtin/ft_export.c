@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:45:40 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:33:40 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
 static t_tlist	*check_export(t_tlist *tokken);
-static void				add_var(t_tlist *tokken, \
+static void		add_var(t_tlist *tokken, \
 t_envlist *t_envlist, int *error_flag);
-static int				check_variable(char *content);
-static void				add_list(char *content, t_envlist *envlist, int type);
+static int		check_variable(char *content);
+static void		add_list(char *content, t_envlist *envlist, int type);
 
 int	builtin_export(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
 	t_tlist	*node;
-	char			**env;
-	int				error_flag;
+	char	**env;
+	int		error_flag;
 
 	error_flag = 0;
 	node = check_export(tokken);
@@ -61,7 +61,7 @@ static t_tlist	*check_export(t_tlist *tokken)
 static void	add_var(t_tlist *tokken, t_envlist *envlist, int *flag)
 {
 	t_tlist	*list;
-	int				type;
+	int		type;
 
 	list = tokken;
 	while (list != NULL)
@@ -120,7 +120,7 @@ static void	add_list(char *content, t_envlist *envlist, int type)
 		node_type = N_EXPORT_ENV;
 	node = find_env(temp, envlist);
 	if (node == NULL)
-		ft_lstadd_back(&envlist, ft_lstnew(temp, node_type));
+		ft_enladd_back(&envlist, ft_enlnew(temp, node_type));
 	else if (type != NAME_ONLY)
 	{
 		free(node->content);

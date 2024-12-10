@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:32:57 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	change_pwd(t_envlist *envlist)
 		}
 		list = list->next;
 	}
-	ft_lstadd_back(&envlist, \
-	ft_lstnew(ft_strjoin(ft_strdup("PWD="), pwd), N_ENV));
+	ft_enladd_back(&envlist, \
+	ft_enlnew(ft_strjoin(ft_strdup("PWD="), pwd), N_ENV));
 	free(pwd);
 }
 
@@ -73,8 +73,8 @@ void	change_oldpwd(t_envlist *envlist, char *path)
 		}
 		list = list->next;
 	}
-	ft_lstadd_back(&envlist, \
-	ft_lstnew(ft_strjoin(ft_strdup("OLDPWD="), path), N_ENV));
+	ft_enladd_back(&envlist, \
+	ft_enlnew(ft_strjoin(ft_strdup("OLDPWD="), path), N_ENV));
 }
 
 void	cd_error(char *path, t_val *val, int *flag)
@@ -90,7 +90,7 @@ void	cd_error(char *path, t_val *val, int *flag)
 int	check_arg(t_tlist *tokken)
 {
 	t_tlist	*list;
-	int				count;
+	int		count;
 
 	count = 0;
 	list = tokken;

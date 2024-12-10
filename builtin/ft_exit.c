@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:23:30 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:34:15 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-static int				count_arg(t_tlist *tokken);
-static int				check_exit_arg(char *content);
+static int		count_arg(t_tlist *tokken);
+static int		check_exit_arg(char *content);
 static t_tlist	*find_exit(t_tlist *tokken);
-static void				print_error_arg(char *content, t_val *val);
+static void		print_error_arg(char *content, t_val *val);
 
 int	builtin_exit(t_tlist *tokken, t_val *val, t_envlist *envlist)
 {
-	int				status;
-	int				count;
+	int		status;
+	int		count;
 	t_tlist	*node;
 
 	node = find_exit(tokken);
@@ -38,7 +38,7 @@ int	builtin_exit(t_tlist *tokken, t_val *val, t_envlist *envlist)
 	}
 	write(1, "exit\n", 5);
 	ft_lstclear(&tokken);
-	ft_lstclear(&envlist);
+	ft_enlclear(&envlist);
 	exit(status);
 	return (0);
 }
@@ -66,7 +66,7 @@ static t_tlist	*find_exit(t_tlist *tokken)
 static int	count_arg(t_tlist *tokken)
 {
 	t_tlist	*list;
-	int				count;
+	int		count;
 
 	list = tokken;
 	count = 0;

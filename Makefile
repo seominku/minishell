@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+         #
+#    By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:48:53 by seojang           #+#    #+#              #
-#    Updated: 2024/12/10 17:48:35 by mku              ###   ########.fr        #
+#    Updated: 2024/12/10 19:47:32 by seojang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ RM = rm -rf
 
 SRC = main.c \
 	Paser/ft_paser.c\
+	Paser/ft_paser_func.c\
 	Paser/ft_paser_here_util.c\
 	Paser/ft_paser_man_util.c\
 	Paser/ft_paser_util_exe.c\
@@ -47,6 +48,8 @@ SRC = main.c \
 	Utils/ft_split_utils.c \
 	Utils/ft_lst_util.c \
 	Utils/ft_env_utils.c\
+	Utils/ft_env_list.c\
+	Utils/ft_qoute_list.c\
 	builtin/ft_builtin.c\
 	builtin/ft_cd.c\
 	builtin/ft_cd_utils.c\

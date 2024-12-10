@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   paser.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 02:30:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:27:24 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:46:42 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PASER_H
 # define PASER_H
 
-typedef struct s_tlist t_tlist,t_tlist,t_envlist;
-typedef struct s_val t_val;
-typedef struct s_here_val t_here_val;
+typedef struct s_here_val	t_here_val;
+typedef struct s_envlist	t_envlist;
+typedef struct s_tlist		t_tlist;
+typedef struct s_qlist		t_qlist;
+typedef struct s_val		t_val;
 
 //ft_paser.c
 void	ft_paser_func(t_tlist **tokken, t_val **val);
@@ -77,4 +79,6 @@ void	ft_here_parents(t_val **val);
 int		ft_find_here(t_tlist *tokken);
 void	ft_heredoc_change(t_tlist **tokken);
 void	ft_heredoc_ex(t_tlist **tokken, t_val **val, int *here_flag);
+//ft_paser_func.c
+int		ft_before_manager(t_tlist **tokken, t_envlist *envlist, t_val **val);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   qoute.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 02:35:12 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:26:55 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*split_qoute(char *content, t_envlist *envlist, t_val *val)
 	}
 	qoute_export(qlist, envlist, val);
 	result = join_list(qlist);
-	ft_lstclear(&qlist);
+	ft_qlstclear(&qlist);
 	free(content);
 	return (result);
 }

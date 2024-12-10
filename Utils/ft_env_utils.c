@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:03:45 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 02:03:40 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:20:34 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
-#include "../String/ft_string.h"
 #include "utils.h"
 
 static int	count_env(t_envlist *envlist);

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_util.c                                      :+:      :+:    :+:   */
+/*   ft_qoute_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 19:47:34 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 19:26:11 by seojang          ###   ########.fr       */
+/*   Created: 2024/12/10 19:27:25 by seojang           #+#    #+#             */
+/*   Updated: 2024/12/10 19:36:16 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-t_tlist	*ft_lstnew(char *content, t_node_type type)
+t_qlist	*ft_qlnew(char *content, t_node_type type)
 {
-	t_tlist	*p;
+	t_qlist	*p;
 
-	p = (t_tlist *)malloc(sizeof(t_tlist));
+	p = (t_qlist *)malloc(sizeof(t_qlist));
 	if (!p)
 		return (NULL);
 	p->content = content;
@@ -25,9 +25,9 @@ t_tlist	*ft_lstnew(char *content, t_node_type type)
 	return (p);
 }
 
-void	ft_lstadd_back(t_tlist **lst, t_tlist *new)
+void	ft_qladd_back(t_qlist **lst, t_qlist *new)
 {
-	t_tlist	*temp;
+	t_qlist	*temp;
 
 	if (!(*lst))
 	{
@@ -40,36 +40,7 @@ void	ft_lstadd_back(t_tlist **lst, t_tlist *new)
 	temp->next = new;
 }
 
-void	ft_lstclear(t_tlist **lst)
-{
-	t_tlist	*temp;
-
-	while (*lst)
-	{
-		temp = *lst;
-		*lst = (*lst)->next;
-		free(temp->content);
-		free(temp);
-	}
-	*lst = (NULL);
-}
-
-char	*join_list(t_qlist *qlist)
-{
-	char	*result;
-	t_qlist	*list;
-
-	result = ft_strdup("");
-	list = qlist;
-	while (list != NULL)
-	{
-		result = ft_strjoin(result, list->content);
-		list = list->next;
-	}
-	return (result);
-}
-
-void	ft_qlstclear(t_qlist **lst)
+void	ft_qlclear(t_qlist **lst)
 {
 	t_qlist	*temp;
 

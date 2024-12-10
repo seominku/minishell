@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:40:38 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:45:32 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
 static t_tlist	*find_echo_cmd(t_tlist *tokken);
-static int				find_option(t_tlist *tokken);
-static void				print_newline(char *content);
-static char				*sub_string(t_tlist *tokken);
+static int		find_option(t_tlist *tokken);
+static void		print_newline(char *content);
+static char		*sub_string(t_tlist *tokken);
 
 int	builtin_echo(t_tlist *tokken, t_val *val)
 {
 	t_tlist	*node;
-	int				option;
-	char			*string;
+	int		option;
+	char	*string;
 
 	node = find_echo_cmd(tokken);
 	if (node == NULL)
@@ -64,8 +64,8 @@ static t_tlist	*find_echo_cmd(t_tlist *tokken)
 static int	find_option(t_tlist *tokken)
 {
 	t_tlist	*list;
-	int				place;
-	int				i;
+	int		place;
+	int		i;
 
 	place = 0;
 	list = tokken;
@@ -97,7 +97,7 @@ static void	print_newline(char *content)
 static char	*sub_string(t_tlist *tokken)
 {
 	t_tlist	*list;
-	char			*string;
+	char	*string;
 
 	string = ft_strdup("");
 	list = tokken;

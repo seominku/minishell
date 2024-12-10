@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 19:30:26 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:43:57 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	void	print_syntax_err(int type, t_val *val)
 static	int	double_pipe_check(t_tlist *tokken)
 {
 	t_tlist	*list;
-	int				flag;
+	int		flag;
 
 	flag = 0;
 	list = tokken;

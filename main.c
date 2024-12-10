@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:02:13 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 20:46:03 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ static void	get_envlist(char **envp, t_envlist **envlist, t_val *val);
 static void	main_set(char **line, t_val *val);
 static void	loop_prompt(char *line, t_envlist *envlist, t_val *val);
 static void	line_null(void);
-void	flag_check(t_val *val);
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	char	*line;
-	t_val	val;
+	char			*line;
+	t_val			val;
 	t_envlist		*envlist;
 
 	(void)ac;
@@ -45,9 +44,9 @@ static void	get_envlist(char **envp, t_envlist **envlist, t_val *val)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-			ft_lstadd_back(envlist, ft_lstnew(ft_strdup(envp[i]), N_ENV));
-			if (!ft_strncmp(envp[i], "HOME", 4))
-				val->home = envp[i] + 5;
+		ft_enladd_back(envlist, ft_enlnew(ft_strdup(envp[i]), N_ENV));
+		if (!ft_strncmp(envp[i], "HOME", 4))
+			val->home = envp[i] + 5;
 		i++;
 	}
 }
@@ -61,7 +60,7 @@ static void	main_set(char **line, t_val *val)
 
 static void	loop_prompt(char *line, t_envlist *envlist, t_val *val)
 {
-	t_tlist *tokken;
+	t_tlist	*tokken;
 
 	main_signal();
 	line = readline("minishell>");
@@ -90,13 +89,4 @@ static void	line_null(void)
 {
 	write(1, "exit\n", 5);
 	exit(1);
-}
-
-void	flag_check(t_val *val)
-{
-	if (g_signal_flag == 1)
-	{
-		g_signal_flag = 0;
-		val->exit_code = 130;
-	}
 }

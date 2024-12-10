@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:25:52 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 20:45:35 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ t_tlist	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val)
 	t_tlist	*tokken;
 
 	tokken = NULL;
-	if(ft_qoute_check(line, val))
+	if (ft_qoute_check(line, val))
 		return (NULL);
 	ft_in_pipe(line, &tokken, envlist, val);
 	if (!tokken)
 	{
 		val->exit_code = 0;
 		return (NULL);
-	}
+	}	
 	change_wave(tokken, val);
 	if (check_token(tokken, val))
 	{
@@ -61,7 +61,9 @@ t_tlist **tokken, t_envlist *envlist, t_val *val)
 		else if (line[i] == '$')
 			ft_lstadd_back(tokken, \
 			ft_lstnew(ft_export_ptr(line, &i, envlist, val), N_WORD));
-		else if (ft_is_alpha(line[i]) || ft_is_digit(line[i]))
+		else if (line[i] == ' ')
+			;
+		else
 			ft_lstadd_back(tokken, \
 			ft_lstnew(ft_alpha_digit(line, &i), N_WORD));
 		i++;

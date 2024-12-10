@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:26 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:27:24 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 19:12:55 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # define NAME_AND_EQUAL 3
 # define FULL_ENV 4
 
-typedef struct s_tlist t_tlist,t_envlist;
+typedef struct s_envlist	t_envlist;
+typedef struct s_tlist		t_tlist;
 
 //change_directory
 int			builtin_cd(t_tlist *tokken, t_envlist *envlist, t_val *val);
