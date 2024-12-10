@@ -6,13 +6,13 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:23:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 15:17:16 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-int	ft_builtin(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
+int	ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
 	if (builtin_cd(tokken, envlist, val))
 		return (COMPLETE);
@@ -31,9 +31,9 @@ int	ft_builtin(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 	return (FALSE);
 }
 
-int	ft_no_pipe_builtin(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
+int	ft_no_pipe_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 
 	list = tokken;
 	while (list != NULL)

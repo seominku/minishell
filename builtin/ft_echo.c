@@ -6,20 +6,20 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:40:38 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 15:15:02 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-static t_tokken_list	*find_echo_cmd(t_tokken_list *tokken);
-static int				find_option(t_tokken_list *tokken);
+static t_tlist	*find_echo_cmd(t_tlist *tokken);
+static int				find_option(t_tlist *tokken);
 static void				print_newline(char *content);
-static char				*sub_string(t_tokken_list *tokken);
+static char				*sub_string(t_tlist *tokken);
 
-int	builtin_echo(t_tokken_list *tokken, t_val *val)
+int	builtin_echo(t_tlist *tokken, t_val *val)
 {
-	t_tokken_list	*node;
+	t_tlist	*node;
 	int				option;
 	char			*string;
 
@@ -46,23 +46,24 @@ int	builtin_echo(t_tokken_list *tokken, t_val *val)
 	return (COMPLETE);
 }
 
-static t_tokken_list	*find_echo_cmd(t_tokken_list *tokken)
+static t_tlist	*find_echo_cmd(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "echo", 4) && ft_strlen(list->content) == 4)
+		if (!ft_strncmp(list->content, "echo", 4) && \
+		ft_strlen(list->content) == 4)
 			return (list->next);
 		list = list->next;
 	}
 	return (NULL);
 }
 
-static int	find_option(t_tokken_list *tokken)
+static int	find_option(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 	int				place;
 	int				i;
 
@@ -93,9 +94,9 @@ static void	print_newline(char *content)
 	free(content);
 }
 
-static char	*sub_string(t_tokken_list *tokken)
+static char	*sub_string(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 	char			*string;
 
 	string = ft_strdup("");

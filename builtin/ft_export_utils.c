@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 01:33:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 17:46:35 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:09:41 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_envlist	*find_env(char *content, t_envlist *envlist)
 		e_length = 0;
 		if (!ft_strncmp(list->content, content, c_length))
 		{
-			while (list->content[e_length] != '\0' && list->content[e_length] != '=')
+			while (list->content[e_length] != '\0' && \
+			list->content[e_length] != '=')
 				e_length++;
 			if (c_length == e_length)
 				return (list);

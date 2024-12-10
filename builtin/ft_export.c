@@ -6,21 +6,21 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:45:40 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 17:48:04 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-static t_tokken_list	*check_export(t_tokken_list *tokken);
-static void				add_var(t_tokken_list *tokken, \
+static t_tlist	*check_export(t_tlist *tokken);
+static void				add_var(t_tlist *tokken, \
 t_envlist *t_envlist, int *error_flag);
 static int				check_variable(char *content);
 static void				add_list(char *content, t_envlist *envlist, int type);
 
-int	builtin_export(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
+int	builtin_export(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
-	t_tokken_list	*node;
+	t_tlist	*node;
 	char			**env;
 	int				error_flag;
 
@@ -43,23 +43,24 @@ int	builtin_export(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 	return (COMPLETE);
 }
 
-static t_tokken_list	*check_export(t_tokken_list *tokken)
+static t_tlist	*check_export(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "export", 6) && ft_strlen(list->content) == 6)
+		if (!ft_strncmp(list->content, "export", 6) && \
+		ft_strlen(list->content) == 6)
 			return (list);
 		list = list->next;
 	}
 	return (NULL);
 }
 
-static void	add_var(t_tokken_list *tokken, t_envlist *envlist, int *flag)
+static void	add_var(t_tlist *tokken, t_envlist *envlist, int *flag)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 	int				type;
 
 	list = tokken;

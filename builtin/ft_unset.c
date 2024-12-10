@@ -6,20 +6,20 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 16:07:19 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-static t_tokken_list	*check_unset(t_tokken_list *tokken);
-static void				check_list(t_tokken_list *tokken, t_envlist *t_envlist);
+static t_tlist	*check_unset(t_tlist *tokken);
+static void				check_list(t_tlist *tokken, t_envlist *t_envlist);
 static void				remove_node(char *content, t_envlist *envlist);
 static int				find_node(char *content, char *content2);
 
-int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
+int	builtin_unset(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
-	t_tokken_list	*node;
+	t_tlist	*node;
 
 	node = check_unset(tokken);
 	if (node == NULL)
@@ -29,23 +29,24 @@ int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 	return (COMPLETE);
 }
 
-static t_tokken_list	*check_unset(t_tokken_list *tokken)
+static t_tlist	*check_unset(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "unset", 5) && ft_strlen(list->content) == 5)
+		if (!ft_strncmp(list->content, "unset", 5) && \
+		ft_strlen(list->content) == 5)
 			return (list);
 		list = list->next;
 	}
 	return (NULL);
 }
 
-static void	check_list(t_tokken_list *tokken, t_envlist *envlist)
+static void	check_list(t_tlist *tokken, t_envlist *envlist)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 
 	list = tokken;
 	while (list != NULL && list->node_type == N_WORD)

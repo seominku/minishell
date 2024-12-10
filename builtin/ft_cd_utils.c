@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 17:34:11 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*find_home_dir(t_envlist *envlist, t_val *val)
 	list = envlist;
 	while (list != NULL)
 	{
-		if (!strncmp(list->content, "HOME=", 5) && ft_count_equal(list->content) == 5)
+		if (!strncmp(list->content, "HOME=", 5) && \
+		ft_count_equal(list->content) == 5)
 			return (ft_substr(list->content, 5, ft_strlen(list->content)));
 		list = list->next;
 	}
@@ -38,7 +39,8 @@ void	change_pwd(t_envlist *envlist)
 	list = envlist;
 	while (list != NULL)
 	{
-		if (!strncmp(list->content, "PWD=", 4) && ft_count_equal(list->content) == 4)
+		if (!strncmp(list->content, "PWD=", 4) && \
+		ft_count_equal(list->content) == 4)
 		{
 			temp = list->content;
 			list->content = ft_strjoin(ft_strdup("PWD="), pwd);
@@ -61,7 +63,8 @@ void	change_oldpwd(t_envlist *envlist, char *path)
 	list = envlist;
 	while (list != NULL)
 	{
-		if (!strncmp(list->content, "OLDPWD=", 7) && ft_count_equal(list->content) == 7)
+		if (!strncmp(list->content, "OLDPWD=", 7) && \
+		ft_count_equal(list->content) == 7)
 		{
 			temp = list->content;
 			list->content = ft_strjoin(ft_strdup("OLDPWD="), path);
@@ -84,16 +87,17 @@ void	cd_error(char *path, t_val *val, int *flag)
 	write(2, "\n", 2);
 }
 
-int	check_arg(t_tokken_list *tokken)
+int	check_arg(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 	int				count;
 
 	count = 0;
 	list = tokken;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, "cd", 2) && ft_count_equal(list->content) == 2)
+		if (!ft_strncmp(list->content, "cd", 2) && \
+		ft_count_equal(list->content) == 2)
 		{
 			while (list->next != NULL && \
 			(list->next->node_type == N_WORD || \

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ms_test.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/10 18:22:50 by mku               #+#    #+#             */
+/*   Updated: 2024/12/10 18:28:28 by mku              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MS_TEST_H
 # define MS_TEST_H
 
@@ -33,30 +45,30 @@ typedef enum e_node_type
 	N_NULL
 }				t_node_type;
 
-typedef struct s_tokken_list
+typedef struct s_tlist
 {
 	char			*content;
 	t_node_type	node_type;
-	struct s_tokken_list	*next;
-}					t_tokken_list, t_envlist, t_qlist, t_tlist;
+	struct s_tlist	*next;
+}					t_tlist, t_envlist, t_qlist;
 
 typedef struct s_val
 {
-	int	pipe_flag;
-	int	prev_pipe;
-	int	fd_in;
-	int	fd_out;
-	int	heredoc_fd;
-	int	tokken_len;
-	int	redir_flag;
-	int	tmp_out;
-	char	*heredoc;
+	int		pipe_flag;
+	int		prev_pipe;
+	int		fd_in;
+	int		fd_out;
+	int		heredoc_fd;
+	int		tokken_len;
+	int		redir_flag;
+	int		tmp_out;
+	char		*heredoc;
 	int		doc_num;
 	int		here_sig;
 	int		exit_code;
-	char	*home;
-	t_tokken_list	*head;
-	t_tokken_list	*cmd;
+	char		*home;
+	t_tlist	*head;
+	t_tlist	*cmd;
 }			t_val;
 
 typedef struct s_here_val

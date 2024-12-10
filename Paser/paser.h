@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   paser.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 02:30:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 16:02:47 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:27:24 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PASER_H
 # define PASER_H
 
-typedef struct s_tokken_list t_tokken_list,t_tlist,t_envlist;
+typedef struct s_tlist t_tlist,t_tlist,t_envlist;
 typedef struct s_val t_val;
 typedef struct s_here_val t_here_val;
 

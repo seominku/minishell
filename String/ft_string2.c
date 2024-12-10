@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:25:51 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 15:30:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:11:06 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t	i;
 
 	i = 0;
-
 	while (i < n)
 	{
 		if (s1[i] == '\0' || (s1[i] != s2[i]))

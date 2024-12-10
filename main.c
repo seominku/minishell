@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:02:13 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 17:59:43 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	main_set(char **line, t_val *val)
 
 static void	loop_prompt(char *line, t_envlist *envlist, t_val *val)
 {
-	t_tokken_list *tokken;
+	t_tlist *tokken;
 
 	main_signal();
 	line = readline("minishell>");

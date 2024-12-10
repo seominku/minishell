@@ -6,18 +6,18 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 19:30:26 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 01:48:45 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
 static	void	print_syntax_err(int type, t_val *val);
-static	int	double_pipe_check(t_tokken_list *tokken);
-static	int	single_pipe_check(t_tokken_list *tokken);
-static	int	brace_check(t_tokken_list *tokken);
+static	int	double_pipe_check(t_tlist *tokken);
+static	int	single_pipe_check(t_tlist *tokken);
+static	int	brace_check(t_tlist *tokken);
 
-int	check_token(t_tokken_list *tokken, t_val *val)
+int	check_token(t_tlist *tokken, t_val *val)
 {
 	if (double_pipe_check(tokken) == ERROR)
 	{
@@ -53,9 +53,9 @@ static	void	print_syntax_err(int type, t_val *val)
 	write(2, "\'\n", 2);
 }
 
-static	int	double_pipe_check(t_tokken_list *tokken)
+static	int	double_pipe_check(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 	int				flag;
 
 	flag = 0;
@@ -73,9 +73,9 @@ static	int	double_pipe_check(t_tokken_list *tokken)
 	return (NO_ERROR);
 }
 
-static	int	single_pipe_check(t_tokken_list *tokken)
+static	int	single_pipe_check(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 
 	list = tokken;
 	if (list->node_type == N_PIPE)
@@ -89,9 +89,9 @@ static	int	single_pipe_check(t_tokken_list *tokken)
 	return (NO_ERROR);
 }
 
-static	int	brace_check(t_tokken_list *tokken)
+static	int	brace_check(t_tlist *tokken)
 {
-	t_tokken_list	*list;
+	t_tlist	*list;
 
 	list = tokken;
 	while (list != NULL)
