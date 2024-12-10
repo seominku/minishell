@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paser.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 02:30:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 03:13:50 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 16:02:47 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_here_val t_here_val;
 void	ft_paser_func(t_tlist **tokken, t_val **val);
 void	ft_before_fork(t_tlist *tokken, int (*pipefd)[2]);
 void	ft_wait_pipe(t_val **val);
+int		ft_after_redir(t_tlist *tokken);
 void	ft_paser_manager(t_tlist *tokken, t_envlist *envlist, t_val **val);
 //ft_paser_utils.c
 void	error(char *s, int num);
@@ -39,7 +40,7 @@ void	ft_redir_add_util(t_tlist **tokken);
 void	ft_redir_here_util(t_tlist **tokken);
 //ft_paser_util_pipe.c
 void	ft_find_pipe(t_tlist *tokken, t_val *val, int *pipefd);
-int	ft_next_pipe(t_tlist *tokken);
+int		ft_next_pipe(t_tlist *tokken);
 //ft_paser_util_here.c
 void	ft_here_util(t_here_val *here_val, t_tlist *tokken, t_val **val);
 void	ft_here_free_set(t_here_val *here_val, t_tlist **tokken);
@@ -73,7 +74,7 @@ void	ft_wait_child(t_val **val, int *status);
 //ft_paser_here_util.c
 void	ft_here_child(t_tlist **tokken, t_val **val, int *here_flag);
 void	ft_here_parents(t_val **val);
-int	ft_find_here(t_tlist *tokken);
+int		ft_find_here(t_tlist *tokken);
 void	ft_heredoc_change(t_tlist **tokken);
 void	ft_heredoc_ex(t_tlist **tokken, t_val **val, int *here_flag);
 #endif

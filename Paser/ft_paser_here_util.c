@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_here_util.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 21:53:26 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 03:31:12 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 15:51:59 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_here_child(t_tlist **tokken, t_val **val, int *here_flag)
 	else
 		ft_heredoc(tokken, val);
 	(*here_flag)++;
-	exit(1);
+	exit(0);
 }
 
 void	ft_here_parents(t_val **val)
@@ -32,15 +32,11 @@ void	ft_here_parents(t_val **val)
 	signal(SIGINT, handler_int);
 	while (wait(&status) > 0)
 	{
-		if (WIFEXITED(status))
+		if (WIFEXITED(status) && g_signal_flag == 0)
+			(*val)->exit_code = WEXITSTATUS(status);
+		else
 		{
-			if (WEXITSTATUS(status) == 1 && g_signal_flag == 2)
-			{
-				(*val)->exit_code = 130;
-				return ;
-			}
-			else if (WEXITSTATUS(status) == 1)
-				(*val)->exit_code = 127;
+			(*val)->exit_code = g_signal_flag + 128;
 			g_signal_flag = 0;
 		}
 	}

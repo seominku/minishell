@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:25:52 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 15:03:39 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 16:50:55 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ t_tokken_list	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val)
 	if(ft_qoute_check(line, val))
 		return (NULL);
 	ft_in_pipe(line, &tokken, envlist, val);
+	if (!tokken)
+	{
+		val->exit_code = 0;
+		return (NULL);
+	}
 	change_wave(tokken, val);
 	if (check_token(tokken, val))
 	{

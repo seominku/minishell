@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_man_util.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 22:00:01 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 03:13:59 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 16:20:44 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_parents_process(t_val **val, int (*pipefd)[2])
 void	ft_child_process(t_tlist *tokken, t_val **val, \
 int (*pipefd)[2], t_envlist *envlist)
 {
+	if (ft_after_redir(tokken))
+		exit(0);
 	ft_find_cmd(tokken, val);
 	signal(SIGINT, SIG_DFL);
 	if ((*val)->prev_pipe != -1)
@@ -59,16 +61,14 @@ void	ft_wait_child(t_val **val, int *status)
 	if (WIFEXITED(*status))
 	{
 		(*val)->exit_code = WEXITSTATUS(*status);
-		if ((*val)->exit_code == 1 && g_signal_flag == 1)
-			(*val)->exit_code = 130;
-		else if ((*val)->exit_code == 1 && g_signal_flag == 2)
-			(*val)->exit_code = 131;
-		else if ((*val)->exit_code == 1)
+		if ((*val)->exit_code == 1)
 			(*val)->exit_code = 127;
-		else
-			(*val)->exit_code = 0;
-		g_signal_flag = 0;
 	}
 	else if (WIFSIGNALED(*status))
+	{
+		printf("here2\n");
 		(*val)->exit_code = WTERMSIG(*status) + 128;
+		if ((*val)->exit_code == 141)
+			(*val)->exit_code = 0;
+	}
 }

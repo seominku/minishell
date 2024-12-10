@@ -1,0 +1,14 @@
+합계 96
+-rw-r--r-- 1 seojang 2023_42gyeongsan  2449 Dec 10 16:21 Makefile
+drwxr-xr-x 2 seojang 2023_42gyeongsan  4096 Dec 10 16:51 Paser
+drwxr-xr-x 2 seojang 2023_42gyeongsan   111 Dec 10 16:51 Signal
+drwxr-xr-x 2 seojang 2023_42gyeongsan  4096 Dec 10 16:51 String
+drwxr-xr-x 2 seojang 2023_42gyeongsan  4096 Dec 10 16:51 Tokenizer
+drwxr-xr-x 2 seojang 2023_42gyeongsan   191 Dec 10 16:51 Utils
+drwxr-xr-x 2 seojang 2023_42gyeongsan  4096 Dec 10 16:51 builtin
+-rw-r--r-- 1 seojang 2023_42gyeongsan  2522 Dec 10 16:23 main.c
+-rw-r--r-- 1 seojang 2023_42gyeongsan  3792 Dec 10 16:51 main.o
+-rwxr-xr-x 1 seojang 2023_42gyeongsan 61392 Dec 10 16:51 minishell
+drwxr-xr-x 6 seojang 2023_42gyeongsan  4096 Dec 10 16:24 minishell_tester
+-rw-r--r-- 1 seojang 2023_42gyeongsan  1374 Dec 10 15:36 ms_test.h
+-rw-r--r-- 1 seojang 2023_42gyeongsan     0 Dec 10 17:20 out

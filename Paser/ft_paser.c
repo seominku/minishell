@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:08:50 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 03:14:44 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 16:06:39 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ void	ft_wait_pipe(t_val **val)
 		ft_wait_child(val, &status);
 }
 
+int	ft_after_redir(t_tlist *tokken)
+{
+	while (tokken)
+	{
+		if (ft_strlen(tokken->content))
+			return (0);
+		tokken = tokken->next;
+	}
+	return (1);
+}
+
 void	ft_paser_manager(t_tlist *tokken, t_envlist *envlist, t_val **val)
 {
 	pid_t	pid;
@@ -49,7 +60,11 @@ void	ft_paser_manager(t_tlist *tokken, t_envlist *envlist, t_val **val)
 	(*val)->prev_pipe = -1;
 	here_flag = 0;
 	if (!here_flag && ft_find_here(tokken))
+	{
 		ft_heredoc_ex(&tokken, val, &here_flag);
+		if ((*val)->exit_code == 130)
+			return ;
+	}
 	if (ft_no_pipe_builtin(tokken, envlist, *val))
 		return ;
 	while (tokken)

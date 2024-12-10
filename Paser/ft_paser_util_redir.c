@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_util_redir.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:11:47 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 02:11:40 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 16:28:09 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_redir_open(t_tlist *lst, t_val **val, t_tlist **tokken)
 	if ((*val)->fd_in < 0)
 	{
 		free(file);
-		write(1, "input error\n", 12);
 		return ;
 	}
 	ft_redir_open_util(tokken);
@@ -76,7 +75,10 @@ void	ft_redir_out(t_tlist *lst, t_val **val, t_tlist **tokken)
 		error("redir error", 1);
 	(*val)->fd_out = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if ((*val)->fd_out < 0)
-		error("output error", 1);
+	{
+		free(file);
+		return ;
+	}
 	ft_redir_out_util(tokken);
 	(*tokken) = head;
 	free(file);
