@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:41:55 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 15:01:19 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 17:22:36 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	qoute_export(t_qlist *qlist, t_envlist *envlist, t_val *val)
 	while (list != NULL)
 	{
 		if (list->node_type == N_DOUBLE)
+		{
 			list->content = check_dollar(list->content, envlist, val);
+		}
 		list = list->next;
 	}
 }
@@ -83,9 +85,9 @@ static void	export_env(t_qlist *qlist, t_envlist *envlist)
 	{
 		if (list->node_type == N_DOLLAR)
 		{
-			free(list->content);
 			i = 0;
 			env = find_env(list->content, envlist);
+			free(list->content);
 			if (env == NULL)
 				list->content = ft_strdup("");
 			else

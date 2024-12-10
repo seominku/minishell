@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:02:13 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 16:23:42 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/10 17:59:43 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static void	loop_prompt(char *line, t_envlist *envlist, t_val *val)
 			ft_lstclear(&tokken);
 		}
 	}
-	//flag_check(val);
 	free(line);
 	line = NULL;
 }
@@ -100,5 +99,4 @@ void	flag_check(t_val *val)
 		g_signal_flag = 0;
 		val->exit_code = 130;
 	}
-	printf("{%d}\n", val->exit_code);
 }

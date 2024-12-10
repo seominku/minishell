@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 15:16:46 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 16:07:19 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_tokken_list	*check_unset(t_tokken_list *tokken);
 static void				check_list(t_tokken_list *tokken, t_envlist *t_envlist);
 static void				remove_node(char *content, t_envlist *envlist);
+static int				find_node(char *content, char *content2);
 
 int	builtin_unset(t_tokken_list *tokken, t_envlist *envlist, t_val *val)
 {
@@ -64,7 +65,7 @@ static void	remove_node(char *content, t_envlist *envlist)
 	node = envlist;
 	while (node != NULL)
 	{
-		if (!strncmp(content, node->content, ft_strlen(content)))
+		if (find_node(content, node->content))
 		{
 			t_node = node;
 			if (prevnode == NULL)
@@ -80,4 +81,17 @@ static void	remove_node(char *content, t_envlist *envlist)
 		prevnode = node;
 		node = node->next;
 	}
+}
+
+static int	find_node(char *str, char *env_str)
+{
+	size_t	env_len;
+
+	env_len = 0;
+	while (env_str[env_len] != '=' && env_str[env_len] != '\0')
+		env_len++;
+	if (!strncmp(str, env_str, env_len) && ft_strlen(str) == env_len)
+		return (1);
+	else
+		return (0);
 }

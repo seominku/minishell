@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 01:33:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 15:23:30 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 17:46:35 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,23 @@ void	variable_error(char *content, int *flag)
 t_envlist	*find_env(char *content, t_envlist *envlist)
 {
 	t_envlist	*list;
-	int			length;
+	int			e_length;
+	int			c_length;
 
-	length = 0;
+	c_length = 0;
 	list = envlist;
-	while (content[length] != '\0' && content[length] != '=')
-		length++;
+	while (content[c_length] != '\0' && content[c_length] != '=')
+		c_length++;
 	while (list != NULL)
 	{
-		if (!ft_strncmp(list->content, content, length))
-			return (list);
+		e_length = 0;
+		if (!ft_strncmp(list->content, content, c_length))
+		{
+			while (list->content[e_length] != '\0' && list->content[e_length] != '=')
+				e_length++;
+			if (c_length == e_length)
+				return (list);
+		}
 		list = list->next;
 	}
 	return (NULL);

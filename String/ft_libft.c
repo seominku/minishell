@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 18:47:45 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 17:38:05 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 17:34:29 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ int	ft_find_c(char *str, char c)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_count_equal(char *content)
+{
+	int	count;
+
+	count = 0;
+	while (content[count] != '\0' && content[count] != '=')
+		count++;
+	if (content[count] == '=')
+		count++;
+	return (count);
 }

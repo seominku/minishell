@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:24:32 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 01:37:30 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 17:31:52 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ int		ft_is_alpha(char c);
 int		ft_is_digit(char c);
 int		ft_find_c(char *str, char c);
 char	**ft_ms_split(char const *s, char c);
+int		ft_count_equal(char *content);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 02:35:12 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 01:49:49 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 17:18:58 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static char	*split_qoute(char *content, t_envlist *envlist, t_val *val)
 			end++;
 	}
 	qoute_export(qlist, envlist, val);
-	free(content);
 	result = join_list(qlist);
 	ft_lstclear(&qlist);
+	free(content);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:26 by mku               #+#    #+#             */
-/*   Updated: 2024/12/08 01:35:30 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/10 17:47:51 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define COMPLETE 1
 # define FAIL_TO_FIND_CMD 0
-# define BUILTIN_ERROR 2
+# define BUILTIN_ERROR 1
 # define BUILTIN_COMPLATE 0
 # define TRUE 1
 # define FALSE 0
