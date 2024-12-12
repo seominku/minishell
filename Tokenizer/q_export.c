@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   q_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:41:55 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 19:31:25 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/12 22:52:46 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ void	qoute_export(t_qlist *qlist, t_envlist *envlist, t_val *val)
 	while (list != NULL)
 	{
 		if (list->node_type == N_DOUBLE)
-		{
 			list->content = check_dollar(list->content, envlist, val);
-		}
 		list = list->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:23:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/12 19:20:00 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
+	int	pipe;
+
+	pipe = 1;
 	if (builtin_cd(tokken, envlist, val))
 		return (COMPLETE);
 	if (builtin_export(tokken, envlist, val))
@@ -22,7 +25,7 @@ int	ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 		return (COMPLETE);
 	if (builtin_pwd(tokken, val))
 		return (COMPLETE);
-	if (builtin_exit(tokken, val, envlist))
+	if (builtin_exit(tokken, val, envlist, pipe))
 		return (COMPLETE);
 	if (builtin_echo(tokken, val))
 		return (COMPLETE);
@@ -34,6 +37,7 @@ int	ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 int	ft_no_pipe_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
 	t_tlist	*list;
+	int			pipe;
 
 	list = tokken;
 	while (list != NULL)
@@ -46,13 +50,14 @@ int	ft_no_pipe_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 			return (0);
 		list = list->next;
 	}
+	pipe = 0;
 	if (builtin_cd(tokken, envlist, val))
 		return (COMPLETE);
 	if (builtin_export(tokken, envlist, val))
 		return (COMPLETE);
 	if (builtin_unset(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_exit(tokken, val, envlist))
+	if (builtin_exit(tokken, val, envlist, pipe))
 		return (COMPLETE);
 	return (FALSE);
 }

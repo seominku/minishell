@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 16:41:39 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 18:07:56 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 00:39:02 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ char	*ft_export_ptr(char *line, int *i, t_envlist *envlist, t_val *val)
 	int		first_num;
 
 	first_num = ++(*i);
-	if (line[*i] == '?')
-	{
-		ret = ft_itoa(val->exit_code);
-		return (ret);
-	}
 	while (line[*i])
 	{
 		if (line[*i + 1] == ' ' || line[*i + 1] == '\t' || \
 		line[*i + 1] == '"' || line[*i + 1] == '\0' || line[*i + 1] == '$')
 		{
+			if (line[*i] == '?')
+			{
+				ret = ft_itoa(val->exit_code);
+			}
 			temp = ft_substr(line, first_num, *i + 1 - first_num);
 			ret = ft_export_push(temp, envlist);
 			free(temp);

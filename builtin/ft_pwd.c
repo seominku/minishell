@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:45:45 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:46:19 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/12 19:29:15 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	builtin_pwd(t_tlist *tokken, t_val *val)
 		ft_strlen(list->content) == 3)
 		{
 			pwd = getcwd(NULL, 0);
+			pwd = ft_strjoin(pwd, "\n");
 			write(1, pwd, ft_strlen(pwd));
-			write(1, "\n", 2);
 			free(pwd);
 			val->exit_code = BUILTIN_COMPLATE;
 			return (1);

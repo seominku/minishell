@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:25:18 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/12 16:57:06 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ int	builtin_cd(t_tlist *tokken, t_envlist *envlist, t_val *val)
 	{
 		write(2, "cd: too many arguments\n", 24);
 		val->exit_code = EXIT_NORMAL_ERR;
+		free(path);
 		return (ARG_ERROR);
 	}
-	if (path[0] == '~')
+	if (path[0] == '\0')
 		home_path(path, envlist, val, &flag);
 	else if (path[0] == '/')
 		absolute_path(path, envlist, val, &flag);
@@ -58,9 +59,9 @@ static char	*find_cd_command(t_tlist *tokken)
 		{
 			if (list->next == NULL || \
 			(list->next->node_type != N_WORD && list->next->node_type != N_ENV))
-				return (ft_strdup("~"));
+				return (ft_strdup(""));
 			else if (list->next->content[0] == '\0')
-				return (ft_strdup("~"));
+				return (ft_strdup(""));
 			else
 				return (ft_strdup((list->next->content)));
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:40:38 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:45:32 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/12 23:43:48 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,11 @@ static int	find_option(t_tlist *tokken)
 
 static void	print_newline(char *content)
 {
-	write(1, content, ft_strlen(content));
-	write(1, "\n", 2);
-	free(content);
+	char	*temp;
+
+	temp = ft_strjoin(content, "\n");
+	write(1, temp, ft_strlen(temp));
+	free(temp);
 }
 
 static char	*sub_string(t_tlist *tokken)
@@ -103,6 +105,11 @@ static char	*sub_string(t_tlist *tokken)
 	list = tokken;
 	while (list != NULL && list->node_type == N_WORD)
 	{
+		if (list->content[0] == '\0')
+		{
+			list = list->next;
+			continue ;
+		}
 		string = ft_strjoin(string, list->content);
 		if (list->next != NULL && list->next->node_type == N_WORD)
 			string = ft_strjoin(string, " ");
