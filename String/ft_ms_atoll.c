@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:04:48 by mku               #+#    #+#             */
-/*   Updated: 2024/12/13 18:46:04 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 19:13:37 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ long long	ft_atoll(char *nptr, int *flag)
 	int			i;
 	int			sign;
 	long long	result;
-	long long	prev;
 
 	i = 0;
 	sign = 1;

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:15:18 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 19:02:55 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 19:36:33 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_dup(t_val **val, t_envlist *envlist, int *pipefd, t_tlist *tokken)
 		close(pipefd[1]);
 		close((*val)->fd_out);
 	}
-	if (ft_builtin(tokken, envlist, *val))
+	if (ft_builtin(tokken, &envlist, *val))
 		exit(0);
 	execute_cmd((*val)->cmd, envlist);
 	exit(EXIT_FAILURE);

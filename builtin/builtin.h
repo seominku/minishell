@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:26 by mku               #+#    #+#             */
-/*   Updated: 2024/12/13 18:46:17 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 23:01:19 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,20 @@ t_envlist *envlist, t_val *val);
 void		variable_error(char *content, int *flag);
 t_envlist	*find_env(char *content, t_envlist *envlist);
 char		**sort_export(t_envlist *envlist);
-void		print_export(char **env);
+void		print_export(char **env, int i);
 int			check_special(char *content);
 //exit
 int			builtin_exit(t_tlist *tokken, t_val *val, \
 t_envlist *envlist, int pipe);
 //builtin
-int			ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val);
+int			ft_builtin(t_tlist *tokken, t_envlist **envlist, t_val *val);
 int			check_arg(t_tlist *tokken);
 int			ft_no_pipe_builtin(t_tlist *tokken, \
-t_envlist *envlist, t_val *val);
+t_envlist **envlist, t_val *val);
 //echo
 int			builtin_echo(t_tlist *tokken, t_val *val);
 //unset
 int			builtin_unset(t_tlist *tokken, \
-t_envlist *envlist, t_val *val);
+t_envlist **envlist, t_val *val);
+int		find_node(char *content, char *content2);
 #endif

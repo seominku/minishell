@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 01:33:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/12 21:52:49 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 23:00:53 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,8 @@ char	**sort_export(t_envlist *envlist)
 	return (env);
 }
 
-void	print_export(char **env)
+void	print_export(char **env, int i)
 {
-	int	i;
 	int	j;
 	int	flag;
 
@@ -98,6 +97,8 @@ void	print_export(char **env)
 		}
 		if (flag == 1)
 			write(1, "\"\n", 2);
+		else
+			write(1, "\n", 1);
 		i++;
 	}
 }

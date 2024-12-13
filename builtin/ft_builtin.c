@@ -6,26 +6,26 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:23:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/13 18:46:52 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 19:36:57 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-int	ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
+int	ft_builtin(t_tlist *tokken, t_envlist **envlist, t_val *val)
 {
 	int	pipe;
 
 	pipe = 1;
-	if (builtin_cd(tokken, envlist, val))
+	if (builtin_cd(tokken, *envlist, val))
 		return (COMPLETE);
-	if (builtin_export(tokken, envlist, val))
+	if (builtin_export(tokken, *envlist, val))
 		return (COMPLETE);
-	if (builtin_env(tokken, envlist, val))
+	if (builtin_env(tokken, *envlist, val))
 		return (COMPLETE);
 	if (builtin_pwd(tokken, val))
 		return (COMPLETE);
-	if (builtin_exit(tokken, val, envlist, pipe))
+	if (builtin_exit(tokken, val, *envlist, pipe))
 		return (COMPLETE);
 	if (builtin_echo(tokken, val))
 		return (COMPLETE);
@@ -34,7 +34,7 @@ int	ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 	return (FALSE);
 }
 
-int	ft_no_pipe_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
+int	ft_no_pipe_builtin(t_tlist *tokken, t_envlist **envlist, t_val *val)
 {
 	t_tlist	*list;
 	int		pipe;
@@ -51,13 +51,13 @@ int	ft_no_pipe_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 		list = list->next;
 	}
 	pipe = 0;
-	if (builtin_cd(tokken, envlist, val))
+	if (builtin_cd(tokken, *envlist, val))
 		return (COMPLETE);
-	if (builtin_export(tokken, envlist, val))
+	if (builtin_export(tokken, *envlist, val))
 		return (COMPLETE);
 	if (builtin_unset(tokken, envlist, val))
 		return (COMPLETE);
-	if (builtin_exit(tokken, val, envlist, pipe))
+	if (builtin_exit(tokken, val, *envlist, pipe))
 		return (COMPLETE);
 	return (FALSE);
 }

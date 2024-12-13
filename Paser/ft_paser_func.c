@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_func.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:46:02 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 20:11:47 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:37:57 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-int	ft_before_manager(t_tlist **tokken, t_envlist *envlist, t_val **val)
+int	ft_before_manager(t_tlist **tokken, t_envlist **envlist, t_val **val)
 {
 	int	here_flag;
 

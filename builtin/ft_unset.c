@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 18:46:27 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:30:47 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
 static t_tlist	*check_unset(t_tlist *tokken);
-static void		check_list(t_tlist *tokken, t_envlist *t_envlist);
-static void		remove_node(char *content, t_envlist *envlist);
-static int		find_node(char *content, char *content2);
+static void		check_list(t_tlist *tokken, t_envlist **t_envlist);
+static void		remove_node(char *content, t_envlist **envlist);
 
-int	builtin_unset(t_tlist *tokken, t_envlist *envlist, t_val *val)
+int	builtin_unset(t_tlist *tokken, t_envlist **envlist, t_val *val)
 {
 	t_tlist	*node;
 
@@ -44,7 +43,7 @@ static t_tlist	*check_unset(t_tlist *tokken)
 	return (NULL);
 }
 
-static void	check_list(t_tlist *tokken, t_envlist *envlist)
+static void	check_list(t_tlist *tokken, t_envlist **envlist)
 {
 	t_tlist	*list;
 
@@ -56,21 +55,21 @@ static void	check_list(t_tlist *tokken, t_envlist *envlist)
 	}
 }
 
-static void	remove_node(char *content, t_envlist *envlist)
+static void	remove_node(char *content, t_envlist **envlist)
 {
 	t_envlist	*node;
 	t_envlist	*prevnode;
 	t_envlist	*t_node;
 
 	prevnode = NULL;
-	node = envlist;
+	node = *envlist;
 	while (node != NULL)
 	{
 		if (find_node(content, node->content))
 		{
 			t_node = node;
-			if (prevnode == NULL)
-				envlist = envlist->next;
+			if (!ft_strncmp(t_node->content, (*envlist)->content, ft_strlen((*envlist)->content)))
+				(*envlist) = (*envlist)->next;
 			else if (t_node->next != NULL)
 				prevnode->next = t_node->next;
 			else
@@ -84,7 +83,7 @@ static void	remove_node(char *content, t_envlist *envlist)
 	}
 }
 
-static int	find_node(char *str, char *env_str)
+int	find_node(char *str, char *env_str)
 {
 	size_t	env_len;
 

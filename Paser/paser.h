@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paser.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 02:30:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 19:46:42 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:37:54 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_paser_func(t_tlist **tokken, t_val **val);
 void	ft_before_fork(t_tlist *tokken, int (*pipefd)[2]);
 void	ft_wait_pipe(t_val **val);
 int		ft_after_redir(t_tlist *tokken);
-void	ft_paser_manager(t_tlist *tokken, t_envlist *envlist, t_val **val);
+void	ft_paser_manager(t_tlist *tokken, t_envlist **envlist, t_val **val);
 //ft_paser_utils.c
 void	error(char *s, int num);
 void	ft_val_set(t_val **val);
@@ -80,5 +80,5 @@ int		ft_find_here(t_tlist *tokken);
 void	ft_heredoc_change(t_tlist **tokken);
 void	ft_heredoc_ex(t_tlist **tokken, t_val **val, int *here_flag);
 //ft_paser_func.c
-int		ft_before_manager(t_tlist **tokken, t_envlist *envlist, t_val **val);
+int		ft_before_manager(t_tlist **tokken, t_envlist **envlist, t_val **val);
 #endif

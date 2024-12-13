@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 19:02:13 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 20:46:03 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:40:04 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ volatile int	g_signal_flag;
 
 static void	get_envlist(char **envp, t_envlist **envlist, t_val *val);
 static void	main_set(char **line, t_val *val);
-static void	loop_prompt(char *line, t_envlist *envlist, t_val *val);
+static void	loop_prompt(char *line, t_envlist **envlist, t_val *val);
 static void	line_null(void);
 
 int	main(int ac, char **av, char **envp)
@@ -31,9 +31,7 @@ int	main(int ac, char **av, char **envp)
 	get_envlist(envp, &envlist, &val);
 	main_set(&line, &val);
 	while (1)
-	{
-		loop_prompt(line, envlist, &val);
-	}
+		loop_prompt(line, &envlist, &val);
 	return (0);
 }
 
@@ -58,7 +56,7 @@ static void	main_set(char **line, t_val *val)
 	val->exit_code = 0;
 }
 
-static void	loop_prompt(char *line, t_envlist *envlist, t_val *val)
+static void	loop_prompt(char *line, t_envlist **envlist, t_val *val)
 {
 	t_tlist	*tokken;
 
@@ -74,7 +72,7 @@ static void	loop_prompt(char *line, t_envlist *envlist, t_val *val)
 	else if (line)
 	{
 		add_history(line);
-		tokken = ft_tokenizer(line, envlist, val);
+		tokken = ft_tokenizer(line, *envlist, val);
 		if (tokken != NULL)
 		{
 			ft_paser_manager(tokken, envlist, &val);

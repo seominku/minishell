@@ -6,7 +6,7 @@
 #    By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:48:53 by seojang           #+#    #+#              #
-#    Updated: 2024/12/13 19:11:15 by mku              ###   ########.fr        #
+#    Updated: 2024/12/13 23:05:21 by mku              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ HEADER = ms_test.h\
 
 OBJ_S = $(SRC_S:.c=.o)
 
-CFLAGS = -g -fsanitize=address -Wall -Werror -Wextra
+CFLAGS = #-g -fsanitize=address -Wall -Werror -Wextra
 
 NAME = minishell
 
