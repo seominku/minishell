@@ -15,7 +15,8 @@
 static void	ft_in_pipe(char *line, t_tlist **tokken);
 static char	*ft_alpha_digit(char *line, int *i);
 static char	*ft_red_check(char *line, int *i);
-static void	change_wave(t_tlist *tokken, t_val *val);
+static void	change_wave(t_tlist *tokken, t_val *val, \
+t_envlist *envlist);
 
 t_tlist	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val)
 {
@@ -30,7 +31,7 @@ t_tlist	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val)
 		val->exit_code = 0;
 		return (NULL);
 	}
-	change_wave(tokken, val);
+	change_wave(tokken, val, envlist);
 	if (check_token(tokken, val))
 	{
 		qoute_check(tokken, envlist, val);
@@ -120,9 +121,10 @@ static char	*ft_red_check(char *line, int *i)
 	return (ptr);
 }
 
-static void	change_wave(t_tlist *tokken, t_val *val)
+static void	change_wave(t_tlist *tokken, t_val *val, t_envlist *envlist)
 {
-	t_tlist	*list;
+	t_tlist		*list;
+	t_envlist	*env;
 
 	list = tokken;
 	while (list != NULL)
@@ -132,7 +134,11 @@ static void	change_wave(t_tlist *tokken, t_val *val)
 			if (list->content[0] == '~' && list->content[1] == '\0')
 			{
 				free(list->content);
-				list->content = ft_strdup(val->home);
+				env = find_env("HOME", envlist);
+				if (env == NULL)
+					list->content = ft_strdup(val->home);
+				else
+					list->content = ft_strdup(env->content + 5);
 			}
 		}
 		list = list->next;
