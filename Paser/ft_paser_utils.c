@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:15:18 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 19:36:33 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 00:07:02 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	error(char *s, int num)
 		exit(1);
 	}
 	else if (num == 2)
-		perror(s);
+	{
+		write(2, "ERROR\n", 6);
+		exit(2);
+	}
 	else if (num == 3)
 	{
 		write(2, "command not found: ", ft_strlen("command not found: "));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_man_util.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 22:00:01 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 18:56:03 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 23:54:09 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_move_token(t_tlist **tokken)
 		(*tokken) = (*tokken)->next;
 }
 
-void	ft_parents_process(t_val **val, int (*pipefd)[2])
+void	ft_parents_process(t_val **val, int (*pipefd)[2], pid_t pid)
 {
 	signal(SIGINT, handler_int);
 	if ((*val)->prev_pipe != -1)
@@ -31,6 +31,7 @@ void	ft_parents_process(t_val **val, int (*pipefd)[2])
 		close((*pipefd)[1]);
 	(*val)->prev_pipe = (*pipefd)[0];
 	(*val)->cmd = NULL;
+	ft_wait_pipe(val, pid);
 }
 
 void	ft_child_process(t_tlist *tokken, t_val **val, \
@@ -74,5 +75,6 @@ void	ft_wait_child(t_val **val, int *status)
 		}
 		else
 			(*val)->exit_code = WTERMSIG(*status) + 128;
+		printf("\n");
 	}
 }

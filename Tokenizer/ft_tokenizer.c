@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:25:52 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 20:33:46 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 00:02:44 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,7 @@ static char	*ft_red_check(char *line, int *i)
 	else if (line[*i] == '>' && line[*i + 1] != '<' && line[*i + 1] != '>')
 		ptr = ft_strdup(">");
 	else
-	{
-		write(2, "REDIRECTION_ERROR\n", 18);
-		exit(1);
-	}
+		ptr = ft_strdup("");
 	return (ptr);
 }
 

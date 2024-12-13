@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_util_redir.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:11:47 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 18:52:38 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 00:04:29 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_redir_out(t_tlist *lst, t_val **val, t_tlist **tokken)
 
 	head = (*tokken);
 	if (!lst->next || !lst->next->content)
-		error("redir next cmd error", 1);
+		error("redir next cmd error\n", 2);
 	file = ft_strdup(lst->next->content);
 	if (!file || !ft_strncmp(file, "|", 1))
 		error("redir error", 1);
@@ -99,7 +99,7 @@ void	ft_redir_add(t_tlist *lst, t_val **val, t_tlist **tokken)
 
 	head = (*tokken);
 	if (!lst->next || !lst->next->content)
-		error("redir next cmd error", 1);
+		error("redir next cmd error\n", 2);
 	file = ft_strdup(lst->next->content);
 	if (!file || !ft_strncmp(file, "|", 1))
 		error("redir error", 1);
