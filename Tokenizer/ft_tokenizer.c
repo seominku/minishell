@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:25:52 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/14 00:02:44 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/14 00:26:16 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,27 +76,16 @@ static char	*ft_alpha_digit(char *line, int *i)
 	{
 		if (line[*i] == '\"')
 		{
-			(*i)++;
-			while (line[*i] != '\"')
-				(*i)++;
-			(*i)++;
+			ft_qoute_while(line, i, 34);
 			continue ;
 		}
 		else if (line[*i] == '\'')
 		{
-			(*i)++;
-			while (line[*i] != '\'')
-				(*i)++;
-			(*i)++;
+			ft_qoute_while(line, i, 39);
 			continue ;
 		}
-		if (line[*i] == '|')
-			break ;
-		if (line[*i] == '<')
-			break ;
-		if (line[*i] == '>')
-			break ;
-		if (line[*i] == ' ')
+		if (line[*i] == '|' || line[*i] == '<' \
+		|| line[*i] == '>' || line[*i] == ' ')
 			break ;
 		(*i)++;
 	}

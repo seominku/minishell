@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:11:47 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/14 00:04:29 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/14 00:19:28 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,12 @@ void	ft_redir_open(t_tlist *lst, t_val **val, t_tlist **tokken)
 
 	head = (*tokken);
 	if (!lst->next || !lst->next->content)
-	{
-		printf("라인 오류\n");
-		exit(2);
-	}
+		error("redir next cmd error\n", 2);
 	file = ft_strdup(lst->next->content);
 	if (!file || !ft_strncmp(file, "|", 1))
 	{
-		printf("라인 오류\n");
 		free(file);
-		exit(1);
+		error("open error\n", 1);
 	}
 	(*val)->fd_in = open(file, O_RDONLY);
 	if ((*val)->fd_in < 0)

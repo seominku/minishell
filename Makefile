@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+         #
+#    By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:48:53 by seojang           #+#    #+#              #
-#    Updated: 2024/12/13 23:05:21 by mku              ###   ########.fr        #
+#    Updated: 2024/12/14 00:25:17 by seojang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC = main.c \
 	Tokenizer/ft_tokenizer.c \
 	Tokenizer/ft_export.c \
 	Tokenizer/ft_qoute_check.c\
+	Tokenizer/ft_qoute_while.c\
 	Tokenizer/ft_check_token.c\
 	Tokenizer/qoute.c\
 	Tokenizer/qoute_utils.c\

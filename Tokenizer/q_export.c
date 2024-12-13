@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   q_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:41:55 by mku               #+#    #+#             */
-/*   Updated: 2024/12/13 17:47:25 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 00:17:00 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char		*check_dollar(char *content, t_envlist *envlist, t_val *val);
 static void		export_env(t_qlist *qlist, t_envlist *envlist);
 static t_qlist	*sub_content(char *content, t_qlist *qlist, t_val *val);
-static void	export_space(t_qlist *node);
+static void		export_space(t_qlist *node);
 
 void	qoute_export(t_qlist *qlist, t_envlist *envlist, t_val *val)
 {
@@ -103,9 +103,9 @@ static void	export_env(t_qlist *qlist, t_envlist *envlist)
 
 static void	export_space(t_qlist *node)
 {
-	char **sp;
-	int	i;
-	char *temp;
+	char	**sp;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	temp = ft_strdup("");

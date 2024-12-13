@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 04:09:54 by mku               #+#    #+#             */
-/*   Updated: 2024/12/13 20:30:47 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 00:19:17 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static void	remove_node(char *content, t_envlist **envlist)
 		if (find_node(content, node->content))
 		{
 			t_node = node;
-			if (!ft_strncmp(t_node->content, (*envlist)->content, ft_strlen((*envlist)->content)))
+			if (!ft_strncmp(t_node->content, (*envlist)->content, \
+			ft_strlen((*envlist)->content)))
 				(*envlist) = (*envlist)->next;
 			else if (t_node->next != NULL)
 				prevnode->next = t_node->next;

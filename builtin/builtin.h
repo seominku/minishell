@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:26 by mku               #+#    #+#             */
-/*   Updated: 2024/12/13 23:01:19 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 00:18:48 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ int			builtin_echo(t_tlist *tokken, t_val *val);
 //unset
 int			builtin_unset(t_tlist *tokken, \
 t_envlist **envlist, t_val *val);
-int		find_node(char *content, char *content2);
+int			find_node(char *content, char *content2);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_util_exe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:13:15 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 19:07:26 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 00:09:52 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	execute_cmd(t_tlist *tokken, t_envlist *envlist)
 	c_env = convert_env(envlist);
 	execve(path, argv, c_env);
 	delete_all_spl(c_env);
-	//error("execve failed", 2);
-	printf("execve failed");
+	write(2, "execve failed\n", 14);
 	exit(126);
 }

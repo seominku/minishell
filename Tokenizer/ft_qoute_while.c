@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal_util.c                                   :+:      :+:    :+:   */
+/*   ft_qoute_while.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 20:35:12 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/14 00:15:00 by seojang          ###   ########.fr       */
+/*   Created: 2024/12/14 00:21:43 by seojang           #+#    #+#             */
+/*   Updated: 2024/12/14 00:26:01 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-void	handler_quit(int sig)
+void	ft_qoute_while(char *line, int *i, const char c)
 {
-	if (sig == SIGQUIT)
-	{
-		write(1, "Quit (core dumped)\n", 19);
-		g_signal_flag = 1;
-		return ;
-	}
-}
-
-void	handler_int(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_signal_flag = 2;
-		return ;
-	}
+	(*i)++;
+	while (line[*i] != c)
+		(*i)++;
+	(*i)++;
 }

@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:12:16 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 19:13:33 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/14 00:24:53 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,6 @@ void	alpha_q(int *start, int *end, t_qlist **qlist, char *content);
 void	dollar_q(int *start, int *end, t_qlist **qlist, char *content);
 void	alpha_dollar(int *start, int *end, \
 t_qlist **qlist, char *content);
+//ft_qoute_while.c
+void	ft_qoute_while(char *line, int *i, const char c);
 #endif
