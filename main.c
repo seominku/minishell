@@ -65,10 +65,7 @@ static void	loop_prompt(char *line, t_envlist **envlist, t_val *val)
 	if (line == NULL)
 		line_null();
 	else if (!ft_strlen(line))
-	{
-		val->exit_code = 0;
 		g_signal_flag = 0;
-	}
 	else if (line)
 	{
 		add_history(line);
