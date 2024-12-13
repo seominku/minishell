@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_man_util.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 22:00:01 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 20:44:13 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:56:03 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,22 @@ int (*pipefd)[2], t_envlist *envlist)
 
 void	ft_wait_child(t_val **val, int *status)
 {
-	(*val)->exit_code = 0;
+	int	prev_exit_code;
+
+	if ((*val)->exit_code > 0)
+		prev_exit_code = (*val)->exit_code;
+	else
+		(*val)->exit_code = 0;
 	if (WIFEXITED(*status))
-	{
 		(*val)->exit_code = WEXITSTATUS(*status);
-		if ((*val)->exit_code == 1)
-			(*val)->exit_code = 127;
-	}
 	else if (WIFSIGNALED(*status))
 	{
-		(*val)->exit_code = WTERMSIG(*status) + 128;
-		if ((*val)->exit_code == 141)
-			(*val)->exit_code = 0;
+		if (WTERMSIG(*status) == 13)
+		{
+			(*val)->exit_code = prev_exit_code;
+			prev_exit_code = 0;
+		}
+		else
+			(*val)->exit_code = WTERMSIG(*status) + 128;
 	}
 }

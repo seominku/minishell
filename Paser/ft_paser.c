@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:08:50 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 20:33:55 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:51:05 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_paser_func(t_tlist **tokken, t_val **val)
 {
-	ft_val_set(val);
 	ft_find_redir(tokken, val);
 }
 
@@ -61,13 +60,16 @@ void	ft_paser_manager(t_tlist *tokken, t_envlist *envlist, t_val **val)
 	while (tokken)
 	{
 		ft_before_fork(tokken, &pipefd);
-		ft_paser_func(&tokken, val);
+		ft_val_set(val);
 		pid = fork();
 		ft_siganl_set();
 		if (pid < 0)
 			error("Fork error", 1);
 		else if (pid == 0)
+		{
+			ft_paser_func(&tokken, val);
 			ft_child_process(tokken, val, &pipefd, envlist);
+		}
 		else
 			ft_parents_process(val, &pipefd);
 		ft_move_token(&tokken);

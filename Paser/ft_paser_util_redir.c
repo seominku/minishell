@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paser_util_redir.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:11:47 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/10 16:28:09 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:52:38 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,23 @@ void	ft_redir_open(t_tlist *lst, t_val **val, t_tlist **tokken)
 
 	head = (*tokken);
 	if (!lst->next || !lst->next->content)
-		error("redir next cmd error", 1);
+	{
+		printf("라인 오류\n");
+		exit(2);
+	}
 	file = ft_strdup(lst->next->content);
 	if (!file || !ft_strncmp(file, "|", 1))
-		error("redir error", 1);
+	{
+		printf("라인 오류\n");
+		free(file);
+		exit(1);
+	}
 	(*val)->fd_in = open(file, O_RDONLY);
 	if ((*val)->fd_in < 0)
 	{
+		printf("%s 그런 파일이나 폴더가 없습니다\n", file);
 		free(file);
-		return ;
+		exit(1);
 	}
 	ft_redir_open_util(tokken);
 	(*tokken) = head;

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:41:55 by mku               #+#    #+#             */
-/*   Updated: 2024/12/12 22:52:46 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 17:47:25 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char		*check_dollar(char *content, t_envlist *envlist, t_val *val);
 static void		export_env(t_qlist *qlist, t_envlist *envlist);
-static void		dollar_qua(t_qlist **qlist, t_val *val);
 static t_qlist	*sub_content(char *content, t_qlist *qlist, t_val *val);
+static void	export_space(t_qlist *node);
 
 void	qoute_export(t_qlist *qlist, t_envlist *envlist, t_val *val)
 {
@@ -62,7 +62,7 @@ static t_qlist	*sub_content(char *content, t_qlist *qlist, t_val *val)
 			alpha_dollar(&start, &end, &qlist, content);
 		else if (content[end] == '$' && content[end + 1] == '?')
 		{
-			dollar_qua(&qlist, val);
+			ft_qladd_back(&qlist, ft_qlnew(ft_itoa(val->exit_code), N_WORD));
 			end += 2;
 			start = end;
 		}
@@ -94,13 +94,30 @@ static void	export_env(t_qlist *qlist, t_envlist *envlist)
 					i++;
 				list->content = ft_substr(\
 				env->content, i + 1, ft_strlen(env->content));
+				export_space(list);
 			}
 		}
 		list = list->next;
 	}
 }
 
-static void	dollar_qua(t_qlist **qlist, t_val *val)
+static void	export_space(t_qlist *node)
 {
-	ft_qladd_back(qlist, ft_qlnew(ft_itoa(val->exit_code), N_WORD));
+	char **sp;
+	int	i;
+	char *temp;
+
+	i = 0;
+	temp = ft_strdup("");
+	sp = ft_ms_split(node->content, ' ');
+	while (sp[i] != NULL)
+	{
+		temp = ft_strjoin(temp, sp[i]);
+		if (sp[i + 1] != NULL)
+			temp = ft_strjoin(temp, " ");
+		i++;
+	}
+	free(node->content);
+	node->content = temp;
+	delete_all_spl(sp);
 }

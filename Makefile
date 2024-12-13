@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+         #
+#    By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:48:53 by seojang           #+#    #+#              #
-#    Updated: 2024/12/10 19:47:32 by seojang          ###   ########.fr        #
+#    Updated: 2024/12/13 19:11:15 by mku              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC = main.c \
 	String/ft_ms_split.c\
 	String/ft_itoa.c\
 	String/ft_libft.c \
+	String/ft_ms_atoll.c\
 	Signal/ft_signal_util.c\
 	Signal/ft_signal.c\
 	Tokenizer/ft_tokenizer.c \
@@ -91,7 +92,7 @@ clean :
 fclean : clean
 	$(RM) $(NAME)
 
-re : 
+re :
 	make fclean
 	make all
 

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:45:40 by mku               #+#    #+#             */
-/*   Updated: 2024/12/12 17:04:19 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 17:43:08 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	builtin_export(t_tlist *tokken, t_envlist *envlist, t_val *val)
 	{
 		env = sort_export(envlist);
 		print_export(env);
-		delete_all_env(env);
+		delete_all_spl(env);
 	}
 	else
 		add_var(node->next, envlist, &error_flag);

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:23:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/12 19:20:00 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 18:46:52 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 int	ft_no_pipe_builtin(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
 	t_tlist	*list;
-	int			pipe;
+	int		pipe;
 
 	list = tokken;
 	while (list != NULL)

@@ -6,7 +6,7 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:15:18 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/08 03:14:25 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 19:02:55 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	error(char *s, int num)
 {
 	if (num == 1)
+	{
 		write(2, s, ft_strlen(s));
+		exit(1);
+	}
 	else if (num == 2)
 		perror(s);
 	else if (num == 3)
@@ -23,8 +26,8 @@ void	error(char *s, int num)
 		write(2, "command not found: ", ft_strlen("command not found: "));
 		write(2, s, ft_strlen(s));
 		write(2, "\n", 1);
+		exit(127);
 	}
-	exit(EXIT_FAILURE);
 }
 
 void	ft_val_set(t_val **val)

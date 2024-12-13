@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:03:45 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 19:20:34 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:42:26 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ char	**convert_env(t_envlist *envlist)
 	return (result);
 }
 
-void	delete_all_env(char **env)
+void	delete_all_spl(char **spl)
 {
 	int	i;
 
 	i = 0;
-	while (env[i] != NULL)
+	while (spl[i] != NULL)
 	{
-		free(env[i]);
+		free(spl[i]);
 		i++;
 	}
-	free(env);
+	free(spl);
 }
 
 static int	count_env(t_envlist *envlist)

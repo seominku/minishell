@@ -6,14 +6,13 @@
 /*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:25:52 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 00:38:49 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/13 17:02:38 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ms_test.h"
 
-static void	ft_in_pipe(char *line, \
-t_tlist **tokken, t_envlist *envlist, t_val *val);
+static void	ft_in_pipe(char *line, t_tlist **tokken);
 static char	*ft_alpha_digit(char *line, int *i);
 static char	*ft_red_check(char *line, int *i);
 static void	change_wave(t_tlist *tokken, t_val *val);
@@ -25,7 +24,7 @@ t_tlist	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val)
 	tokken = NULL;
 	if (ft_qoute_check(line, val))
 		return (NULL);
-	ft_in_pipe(line, &tokken, envlist, val);
+	ft_in_pipe(line, &tokken);
 	if (!tokken)
 	{
 		val->exit_code = 0;
@@ -45,7 +44,7 @@ t_tlist	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val)
 }
 
 static void	ft_in_pipe(char *line, \
-t_tlist **tokken, t_envlist *envlist, t_val *val)
+t_tlist **tokken)
 {
 	int		i;
 
@@ -71,10 +70,8 @@ static char	*ft_alpha_digit(char *line, int *i)
 {
 	int		start;
 	char	*result;
-	int		q_flag;
 
 	start = *i;
-	q_flag = 0;
 	while (line[*i] != '\0')
 	{
 		if (line[*i] == '\"')

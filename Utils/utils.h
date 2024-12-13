@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 21:58:08 by mku               #+#    #+#             */
-/*   Updated: 2024/12/10 19:36:02 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:42:43 by mku              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_qlist		t_qlist;
 typedef enum e_node_type	t_node_type;
 //env_utils
 char			**convert_env(t_envlist *envlist);
-void			delete_all_env(char **env);
+void			delete_all_spl(char **spl);
 //lst_utils
 t_tlist			*ft_lstnew(char *content, t_node_type type);
 void			ft_lstadd_back(t_tlist **lst, t_tlist *new);
