@@ -112,7 +112,7 @@ int	check_special(char *content)
 	{
 		if ((content[i] >= 'a' && content[i] <= 'z') || \
 		(content[i] >= 'A' && content[i] <= 'Z') || \
-		ft_is_digit(content[i]))
+		ft_is_digit(content[i]) || content[i] == '_')
 			i++;
 		else
 			return (NO_IDENTYFIER);
