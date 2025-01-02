@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 02:30:10 by mku               #+#    #+#             */
-/*   Updated: 2024/12/13 23:54:44 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/14 02:39:28 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_val		t_val;
 //ft_paser.c
 void	ft_paser_func(t_tlist **tokken, t_val **val);
 void	ft_before_fork(t_tlist *tokken, int (*pipefd)[2]);
-void	ft_wait_pipe(t_val **val, pid_t pid);
+void	ft_wait_pipe(t_val **val);
 int		ft_after_redir(t_tlist *tokken);
 void	ft_paser_manager(t_tlist *tokken, t_envlist **envlist, t_val **val);
 //ft_paser_utils.c
@@ -69,7 +69,7 @@ void	ft_excute_cmd_util_two(t_tlist *tokken, int arg_count, char **argv);
 void	ft_find_path_set(char *paths, char **path, char *command);
 //ft_paser_man_util.c
 void	ft_move_token(t_tlist **tokken);
-void	ft_parents_process(t_val **val, int (*pipefd)[2], pid_t pid);
+void	ft_parents_process(t_val **val, int (*pipefd)[2]);
 void	ft_child_process(t_tlist *tokken, t_val **val, \
 int (*pipefd)[2], t_envlist *envlist);
 void	ft_wait_child(t_val **val, int *status);

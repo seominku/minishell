@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 17:25:52 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/14 00:26:16 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/14 02:28:41 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 static void	ft_in_pipe(char *line, t_tlist **tokken);
 static char	*ft_alpha_digit(char *line, int *i);
 static char	*ft_red_check(char *line, int *i);
-static void	change_wave(t_tlist *tokken, t_val *val, \
-t_envlist *envlist);
+static void	change_wave(t_tlist *tokken, t_val *val, t_envlist *envlist);
 
 t_tlist	*ft_tokenizer(char *line, t_envlist *envlist, t_val *val)
 {

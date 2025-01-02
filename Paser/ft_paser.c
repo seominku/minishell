@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:08:50 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/13 23:53:15 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/14 02:38:44 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	ft_before_fork(t_tlist *tokken, int (*pipefd)[2])
 	}
 }
 
-void	ft_wait_pipe(t_val **val, pid_t pid)
+void	ft_wait_pipe(t_val **val)
 {
 	int	status;
 
-	if (waitpid(pid, &status, 0) > 0)
+	while (wait(&status) > 0)
 		ft_wait_child(val, &status);
 }
 
@@ -71,9 +71,10 @@ void	ft_paser_manager(t_tlist *tokken, t_envlist **envlist, t_val **val)
 			ft_child_process(tokken, val, &pipefd, *envlist);
 		}
 		else
-			ft_parents_process(val, &pipefd, pid);
+			ft_parents_process(val, &pipefd);
 		ft_move_token(&tokken);
 	}
 	if ((*val)->prev_pipe != -1)
 		close((*val)->prev_pipe);
+	ft_wait_pipe(val);
 }

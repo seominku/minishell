@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mku <mku@student.42gyeongsan.kr>           +#+  +:+       +#+        */
+/*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:07:07 by mku               #+#    #+#             */
-/*   Updated: 2024/12/12 16:57:06 by mku              ###   ########.fr       */
+/*   Updated: 2024/12/14 02:40:42 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	absolute_path(char *path, \
 t_envlist *envlist, t_val *val, int *flag);
 static void	relative_path(char *path, \
 t_envlist *envlist, t_val *val, int *flag);
-static void	home_path(char *path, t_envlist *envlist, t_val *val, int *flag);
+static void	home_path(t_envlist *envlist, t_val *val, int *flag);
 
 int	builtin_cd(t_tlist *tokken, t_envlist *envlist, t_val *val)
 {
@@ -36,7 +36,7 @@ int	builtin_cd(t_tlist *tokken, t_envlist *envlist, t_val *val)
 		return (ARG_ERROR);
 	}
 	if (path[0] == '\0')
-		home_path(path, envlist, val, &flag);
+		home_path(envlist, val, &flag);
 	else if (path[0] == '/')
 		absolute_path(path, envlist, val, &flag);
 	else
@@ -112,7 +112,7 @@ static void	relative_path(char *path, t_envlist *envlist, t_val *val, int *flag)
 	free(join_path);
 }
 
-static void	home_path(char *path, t_envlist *envlist, t_val *val, int *flag)
+static void	home_path(t_envlist *envlist, t_val *val, int *flag)
 {
 	char	*old_pwd;
 	char	*home_dir;
@@ -126,7 +126,7 @@ static void	home_path(char *path, t_envlist *envlist, t_val *val, int *flag)
 		return ;
 	}
 	if (chdir(home_dir))
-		cd_error(path, val, flag);
+		cd_error(home_dir, val, flag);
 	change_oldpwd(envlist, old_pwd);
 	change_pwd(envlist);
 	free(home_dir);

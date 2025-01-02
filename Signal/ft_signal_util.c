@@ -6,7 +6,7 @@
 /*   By: seojang <seojang@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:35:12 by seojang           #+#    #+#             */
-/*   Updated: 2024/12/14 00:15:00 by seojang          ###   ########.fr       */
+/*   Updated: 2024/12/14 02:49:23 by seojang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	handler_int(int sig)
 {
 	if (sig == SIGINT)
 	{
+		write(1, "\n", 1);
 		g_signal_flag = 2;
 		return ;
 	}
